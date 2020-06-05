@@ -23,6 +23,19 @@
 
     <h2>Meine Items verwalten</h2>
 
+    con.Open();
+    string query = "select Restaurant_Id from dbo.restaurants";
+    cmd = new SqlCommand(query, con);
+    cmd.CommandType = CommandType.Text;
+
+    using (SqlDataReader dr = cmd.ExecuteReader())
+    {
+    GridView1.DataSource = dr;
+    GridView1.DataBind();
+    }
+
+    con.Close();
+
     <table>
         <tr>
             <th>Company</th>
