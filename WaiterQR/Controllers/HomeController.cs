@@ -26,5 +26,12 @@ namespace WaiterQR.Controllers
 
             return View();
         }
+       
+        public ActionResult ItemPresentation()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }
