@@ -29,5 +29,7 @@ namespace WaiterQR.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<WaiterQR.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
