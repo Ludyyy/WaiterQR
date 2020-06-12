@@ -1,5 +1,4 @@
-﻿@model IEnumerable<WaiterQR.Models.RestaurantModel>
-
+﻿@model  List<WaiterQR.Database.Restaurant>
 
 @{
     ViewBag.Title = "ShowRestaurant";
@@ -28,24 +27,25 @@
         }
     </style>
 </head>
-<body>
 
-    <table>
-        <tr>
-            <th>OwnerID</th>
-            <th>RestaurantPostalCode</th>
-            <th>Restaurant_City</th>
-        </tr>
-        @*@{foreach (var item in )
-            {
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            }
-        }*@
-    </table>
+<table>
+    <tr>
+        <th>Restaurant</th>
+        <th>Owner</th>
+        <th>Ort</th>
+        <th>Haus</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td> @item.RestaurantID </td>
+    <td> @item.OwnerID </td>
+    <td> @item.RestaurantPostalCode, @item.Restaurant_City</td>
+    <td> @item.Restaurant_StreetName, @item.Restaurant_HouseNo</td>
+</tr>
+    }
+
+</table>
 
 </body>
 </html>

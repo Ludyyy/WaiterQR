@@ -188,6 +188,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
+    <Compile Include="Controllers\Restaurantentities.cs" />
     <Compile Include="Database\AspNetRoles.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -318,6 +319,7 @@
     <Content Include="Views\Restaurant\AddRestaurant.cshtml">
       <BrowseToURL>~/Restaurant/AddRestaurant</BrowseToURL>
     </Content>
+    <Content Include="Views\Restaurant\ShowRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

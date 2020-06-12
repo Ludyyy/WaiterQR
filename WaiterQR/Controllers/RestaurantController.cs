@@ -35,7 +35,7 @@ namespace WaiterQR.Controllers
                     Restaurant restaurant = new Restaurant();
                     restaurant.OwnerID = restaurants.OwnerID;
                     restaurant.RestaurantPostalCode = restaurants.RestaurantPostalCode;
-                    restaurant.Restaurant_City =restaurants.Restaurant_City;
+                    restaurant.Restaurant_City = restaurants.Restaurant_City;
                     restaurant.Restaurant_StreetName = restaurants.Restaurant_StreetName;
                     restaurant.Restaurant_HouseNo = restaurants.Restaurant_HouseNo;
 
@@ -65,59 +65,31 @@ namespace WaiterQR.Controllers
             }
             return View();
 
-            //    try
-            //    {
-            //        if (ModelState.IsValid)
-            //        {
-            //            RestaurantRepository restaurantrepo = new RestaurantRepository();
-
-            //            if (restaurantrepo.AddRestaurant(restaurants))
-            //            {
-            //                ViewBag.message = "restaurant details added successfully";
-            //            }
-            //        }
-
-            //        return View();
-            //    }
-            //    catch
-            //    {
-            //        return View();
-            //    }
-            //}
-
-            //To Add Restaurant details
-            //    //public bool AddRestaurants(RestaurantModel obj)
-            //    {
-
-            //        connection();
-
-            //        SqlCommand com = new SqlCommand("AddNewRestaurantsDetails", con);
-            //        com.CommandType = CommandType.StoredProcedure;
-            //        com.Parameters.AddWithValue("@Restaurant_Id", obj.ResID);
-            //        com.Parameters.AddWithValue("@Owner_FirstName", obj.FirstName);
-            //        com.Parameters.AddWithValue("@Owner_LastName", obj.LastName);
-            //        com.Parameters.AddWithValue("@Restaurant_City", obj.City);
-            //        com.Parameters.AddWithValue("@Restaurant_StreetName", obj.StreetName);
-            //        com.Parameters.AddWithValue("@Restaurant_PostalCode", obj.PostalCode);
-
-            //        con.Open();
-            //        int i = com.ExecuteNonQuery();
-            //        con.Close();
-            //        if (i >= 1)
-            //        {
-
-            //            return true;
-
-            //        }
-            //        else
-            //        {
-
-            //            return false;
-            //        }
-
-            //    }
-
         }
 
+        public ActionResult ShowRestaurant(RestaurantModel restaurant)
+        {
+            try {
+                var tempList = new List<Restaurant>();
+                using (websitedbEntities db = new websitedbEntities())
+                {
+                    foreach (Restaurant r in db.Restaurant)
+                    {
+                        tempList.Add(r);
+                    }
+                                    }
+                return View(tempList);
+            }
+
+
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+                return View();
+ 
+            }
+
+        } 
     }
 }
