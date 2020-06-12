@@ -7,6 +7,7 @@
 <h2>ShowRestaurant</h2>
 
 <!DOCTYPE html>
+
 <html>
 <head>
     <style>
@@ -42,6 +43,7 @@
     <td> @item.OwnerID </td>
     <td> @item.RestaurantPostalCode, @item.Restaurant_City</td>
     <td> @item.Restaurant_StreetName, @item.Restaurant_HouseNo</td>
+    <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant",item,null)</td>
 </tr>
     }
 

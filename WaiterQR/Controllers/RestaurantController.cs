@@ -90,6 +90,74 @@ namespace WaiterQR.Controllers
  
             }
 
-        } 
+        }
+        public ActionResult EditRestaurant(RestaurantModel restaurant)
+        {
+            try
+            {
+                using (websitedbEntities db = new websitedbEntities())
+                {
+
+                    //foreach (Restaurant r in db.Restaurant)
+                    //{
+                    var res = db.Restaurant.Where(x => x.RestaurantID == restaurant.ResID).First();
+                   
+                        //r2.OwnerID = 2;
+                        //db.SaveChanges();
+                    //}
+                    
+                    return View(res);
+                }
+            }
+
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+                return View();
+            }
+
+        }
+        public ActionResult EditRestaurant(RestaurantModel restaurant, Boolean change)
+        {
+            if (change = true)
+            {
+                try
+                {
+                    using (websitedbEntities db = new websitedbEntities())
+                    {
+
+                        //foreach (Restaurant r in db.Restaurant)
+                        //{
+                        var res = db.Restaurant.Where(x => x.RestaurantID == restaurant.ResID).First();
+
+                        res.OwnerID = restaurant.OwnerID;
+                        res.RestaurantPostalCode = restaurant.RestaurantPostalCode;
+                        res.Restaurant_City = restaurant.Restaurant_City;
+                        res.Restaurant_HouseNo = restaurant.Restaurant_HouseNo;
+                        res.Restaurant_StreetName = restaurant.Restaurant_StreetName;
+
+                        db.SaveChanges();
+
+                        //r2.OwnerID = 2;
+                        //db.SaveChanges();
+                        //}
+
+                        return View(res);
+                    }
+                }
+
+                catch (Exception e)
+                {
+                    string s = string.Format("Fehler: {0}", e.Message);
+                    s = string.Format("Typ: {0}", e.GetType());
+                    return View();
+                }
+
+            }
+            return View();
+        }
+        
     }
 }
+

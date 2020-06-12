@@ -29,14 +29,6 @@ namespace WaiterQR.Models
         [Required(ErrorMessage = "Restaurant_HouseNo is required.")]
         public string Restaurant_HouseNo { get; set; }
 
-        
     }
-    //public class RestaurantRepository
-    //{
-    //    internal bool AddRestaurant(RestaurantModel restaurants)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
 
 }
