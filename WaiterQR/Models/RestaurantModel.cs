@@ -14,27 +14,29 @@ namespace WaiterQR.Models
         [Display(Name = "RestaurantID")]
         public int ResID { get; set; }
 
-        [Required(ErrorMessage = "First name is required.")]
-        public string FirstName { get; set; }
+        [Required(ErrorMessage = "OwnerID is required.")]
+        public int OwnerID { get; set; }
 
-        [Required(ErrorMessage = "Last name is required.")]
-        public string LastName { get; set; }
+        [Required(ErrorMessage = "RestaurantPostalCode is required.")]
+        public int RestaurantPostalCode { get; set; }
 
-        [Required(ErrorMessage = "City is required.")]
-        public string City { get; set; }
+        [Required(ErrorMessage = "Restaurant_City is required.")]
+        public string Restaurant_City { get; set; }
 
-        [Required(ErrorMessage = "Street is required.")]
-        public string StreetName { get; set; }
+        [Required(ErrorMessage = "Restaurant_StreetName is required.")]
+        public string Restaurant_StreetName { get; set; }
 
-        [Required(ErrorMessage = "PostalCode")]
-        public int PostalCode { get; set; }
+        [Required(ErrorMessage = "Restaurant_HouseNo is required.")]
+        public string Restaurant_HouseNo { get; set; }
+
+        
     }
-    public class RestaurantRepository
-    {
-        internal bool AddRestaurant(RestaurantModel restaurants)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //public class RestaurantRepository
+    //{
+    //    internal bool AddRestaurant(RestaurantModel restaurants)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
 }

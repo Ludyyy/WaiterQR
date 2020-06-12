@@ -218,7 +218,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Restaurants.cs">
+    <Compile Include="Database\Restaurant.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -251,6 +251,7 @@
       <DependentUpon>DbModel.edmx</DependentUpon>
       <LastGenOutput>DbModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Database\DbModel.edmx.sql" />
     <Content Include="Database\DbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DbModel.edmx</DependentUpon>
@@ -314,7 +315,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Home\ItemPresentation.cshtml" />
-    <Content Include="Views\Restaurant\AddRestaurant.cshtml" />
+    <Content Include="Views\Restaurant\AddRestaurant.cshtml">
+      <BrowseToURL>~/Restaurant/AddRestaurant</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

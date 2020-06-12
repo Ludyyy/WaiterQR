@@ -33,5 +33,6 @@ namespace WaiterQR.Controllers
 
             return View();
         }
+
     }
 }

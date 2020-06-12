@@ -10,10 +10,10 @@
         <EntityTypeShape EntityType="websitedbModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="websitedbModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="websitedbModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="websitedbModel.Restaurants" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="websitedbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="websitedbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="websitedbModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="websitedbModel.Restaurant" Width="1.5" PointX="4.5" PointY="6.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

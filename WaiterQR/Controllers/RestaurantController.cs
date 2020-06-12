@@ -15,8 +15,8 @@ namespace WaiterQR.Controllers
         private SqlConnection con;
         private void connection()
         {
-            string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
-            con = new SqlConnection(constr);
+            //string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
+            //con = new SqlConnection(constr);
         }
 
         // GET: Restaurant
@@ -31,90 +31,93 @@ namespace WaiterQR.Controllers
             {
                 using (websitedbEntities db = new websitedbEntities())
                 {
-                    Restaurants restaurants1 = new Restaurants();
-                    restaurants1.Restaurant_Id = 3;
-                    restaurants1.Owner_LastName = "Ly";
-                    restaurants1.Owner_FirstName = "Kung muy";
-                    restaurants1.Restaurant_City = "Köln Kalk Ehrenmord";
-                    restaurants1.Restaurant_PostalCode = 51105;
-                    restaurants1.Restaurant_StreetName = "Rolshover Str. 12";
-                    
-                    db.Restaurants.Add(restaurants1);
+
+                    Restaurant restaurant = new Restaurant();
+                    restaurant.OwnerID = restaurants.OwnerID;
+                    restaurant.RestaurantPostalCode = restaurants.RestaurantPostalCode;
+                    restaurant.Restaurant_City =restaurants.Restaurant_City;
+                    restaurant.Restaurant_StreetName = restaurants.Restaurant_StreetName;
+                    restaurant.Restaurant_HouseNo = restaurants.Restaurant_HouseNo;
+
+
+
+                    db.Restaurant.Add(restaurant);
                     db.SaveChanges();
                 }
 
                 using (websitedbEntities db = new websitedbEntities())
                 {
-                    foreach(Restaurants r in db.Restaurants)
+                    foreach (Restaurant r in db.Restaurant)
                     {
-                       
+                        var r2 = db.Restaurant.Where(x => x.Restaurant_StreetName == "Rolshover").First();
+                        r2.OwnerID = 2;
+                        db.SaveChanges();
                     }
 
-                    Restaurants ds = db.Restaurants.Where(x => x.Restaurant_StreetName == "Rolshoverstr ").First();
-                    ds.Owner_FirstName = "Shengu Ling long";
-                    db.SaveChanges();
                 }
-                
+            }
+
             catch (Exception e)
             {
                 string s = string.Format("Fehler: {0}", e.Message);
                 s = string.Format("Typ: {0}", e.GetType());
 
             }
-           
+            return View();
 
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    RestaurantRepository restaurantrepo = new RestaurantRepository();
+            //    try
+            //    {
+            //        if (ModelState.IsValid)
+            //        {
+            //            RestaurantRepository restaurantrepo = new RestaurantRepository();
 
-                    if (restaurantrepo.AddRestaurant(restaurants))
-                    {
-                        ViewBag.message = "restaurant details added successfully";
-                    }
-                }
+            //            if (restaurantrepo.AddRestaurant(restaurants))
+            //            {
+            //                ViewBag.message = "restaurant details added successfully";
+            //            }
+            //        }
 
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            //        return View();
+            //    }
+            //    catch
+            //    {
+            //        return View();
+            //    }
+            //}
 
-        //To Add Restaurant details
-        public bool AddRestaurants(RestaurantModel obj)
-        {
+            //To Add Restaurant details
+            //    //public bool AddRestaurants(RestaurantModel obj)
+            //    {
 
-            connection();
-  
-            SqlCommand com = new SqlCommand("AddNewRestaurantsDetails", con);
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@Restaurant_Id", obj.ResID);
-            com.Parameters.AddWithValue("@Owner_FirstName", obj.FirstName);
-            com.Parameters.AddWithValue("@Owner_LastName", obj.LastName);
-            com.Parameters.AddWithValue("@Restaurant_City", obj.City);
-            com.Parameters.AddWithValue("@Restaurant_StreetName", obj.StreetName);
-            com.Parameters.AddWithValue("@Restaurant_PostalCode", obj.PostalCode);
+            //        connection();
 
-            con.Open();
-            int i = com.ExecuteNonQuery();
-            con.Close();
-            if (i >= 1)
-            {
+            //        SqlCommand com = new SqlCommand("AddNewRestaurantsDetails", con);
+            //        com.CommandType = CommandType.StoredProcedure;
+            //        com.Parameters.AddWithValue("@Restaurant_Id", obj.ResID);
+            //        com.Parameters.AddWithValue("@Owner_FirstName", obj.FirstName);
+            //        com.Parameters.AddWithValue("@Owner_LastName", obj.LastName);
+            //        com.Parameters.AddWithValue("@Restaurant_City", obj.City);
+            //        com.Parameters.AddWithValue("@Restaurant_StreetName", obj.StreetName);
+            //        com.Parameters.AddWithValue("@Restaurant_PostalCode", obj.PostalCode);
 
-                return true;
+            //        con.Open();
+            //        int i = com.ExecuteNonQuery();
+            //        con.Close();
+            //        if (i >= 1)
+            //        {
 
-            }
-            else
-            {
+            //            return true;
 
-                return false;
-            }
-            
+            //        }
+            //        else
+            //        {
+
+            //            return false;
+            //        }
+
+            //    }
+
         }
 
     }
-
 }
