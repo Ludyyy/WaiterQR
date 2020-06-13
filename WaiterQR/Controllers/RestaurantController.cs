@@ -98,13 +98,13 @@ namespace WaiterQR.Controllers
             {
                 try
                 {
-                    using (websitedbEntities db = new websitedbEntities())
-                    {
+                    websitedbEntities db = new websitedbEntities();
+                    
 
-                        var res = db.Restaurant.Where(x => x.RestaurantID == restaurantid).First();
+                    var res = db.Restaurant.SingleOrDefault(x => x.RestaurantID == restaurantid);
 
-                        return View(res);
-                    }
+                    return View(res);
+                    
                 }
 
                 catch (Exception e)
@@ -120,31 +120,27 @@ namespace WaiterQR.Controllers
 
         }
         [HttpPost]
-        public ActionResult EditRestaurant(RestaurantModel restaurant)
+        public ActionResult EditRestaurant(Restaurant restaurant)
         {
             try
             {
-                using (websitedbEntities db = new websitedbEntities())
-                {
+                websitedbEntities db = new websitedbEntities();
+                
 
-                    //foreach (Restaurant r in db.Restaurant)
-                    //{
-                    var res = db.Restaurant.Where(x => x.RestaurantID == restaurant.ResID).First();
+                
+                Restaurant res = db.Restaurant.SingleOrDefault(x => x.RestaurantID == restaurant.RestaurantID);
 
-                    res.OwnerID = restaurant.OwnerID;
-                    res.RestaurantPostalCode = restaurant.RestaurantPostalCode;
-                    res.Restaurant_City = restaurant.Restaurant_City;
-                    res.Restaurant_HouseNo = restaurant.Restaurant_HouseNo;
-                    res.Restaurant_StreetName = restaurant.Restaurant_StreetName;
+                res.OwnerID = restaurant.OwnerID;
+                res.RestaurantPostalCode = restaurant.RestaurantPostalCode;
+                res.Restaurant_City = restaurant.Restaurant_City;
+                res.Restaurant_HouseNo = restaurant.Restaurant_HouseNo;
+                res.Restaurant_StreetName = restaurant.Restaurant_StreetName;
 
-                    db.SaveChanges();
+                db.SaveChanges();
 
-                    //r2.OwnerID = 2;
-                    //db.SaveChanges();
-                    //}
-
-                    return View(res);
-                }
+                ViewBag.message = "Restaurant information updated successfully.";
+                return View(res);
+                
             }
 
             catch (Exception e)
