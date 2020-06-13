@@ -69,7 +69,8 @@ namespace WaiterQR.Controllers
 
         public ActionResult ShowRestaurant(RestaurantModel restaurant)
         {
-            try {
+            try
+            {
                 var tempList = new List<Restaurant>();
                 using (websitedbEntities db = new websitedbEntities())
                 {
@@ -77,7 +78,7 @@ namespace WaiterQR.Controllers
                     {
                         tempList.Add(r);
                     }
-                                    }
+                }
                 return View(tempList);
             }
 
@@ -87,61 +88,20 @@ namespace WaiterQR.Controllers
                 string s = string.Format("Fehler: {0}", e.Message);
                 s = string.Format("Typ: {0}", e.GetType());
                 return View();
- 
+
             }
 
         }
-        public ActionResult EditRestaurant(RestaurantModel restaurant)
+        public ActionResult EditRestaurant(int restaurantid)
         {
-            try
-            {
-                using (websitedbEntities db = new websitedbEntities())
-                {
-
-                    //foreach (Restaurant r in db.Restaurant)
-                    //{
-                    var res = db.Restaurant.Where(x => x.RestaurantID == restaurant.ResID).First();
-                   
-                        //r2.OwnerID = 2;
-                        //db.SaveChanges();
-                    //}
-                    
-                    return View(res);
-                }
-            }
-
-            catch (Exception e)
-            {
-                string s = string.Format("Fehler: {0}", e.Message);
-                s = string.Format("Typ: {0}", e.GetType());
-                return View();
-            }
-
-        }
-        public ActionResult EditRestaurant(RestaurantModel restaurant, Boolean change)
-        {
-            if (change = true)
+            if (!restaurantid.Equals(null))
             {
                 try
                 {
                     using (websitedbEntities db = new websitedbEntities())
                     {
 
-                        //foreach (Restaurant r in db.Restaurant)
-                        //{
-                        var res = db.Restaurant.Where(x => x.RestaurantID == restaurant.ResID).First();
-
-                        res.OwnerID = restaurant.OwnerID;
-                        res.RestaurantPostalCode = restaurant.RestaurantPostalCode;
-                        res.Restaurant_City = restaurant.Restaurant_City;
-                        res.Restaurant_HouseNo = restaurant.Restaurant_HouseNo;
-                        res.Restaurant_StreetName = restaurant.Restaurant_StreetName;
-
-                        db.SaveChanges();
-
-                        //r2.OwnerID = 2;
-                        //db.SaveChanges();
-                        //}
+                        var res = db.Restaurant.Where(x => x.RestaurantID == restaurantid).First();
 
                         return View(res);
                     }
@@ -156,8 +116,47 @@ namespace WaiterQR.Controllers
 
             }
             return View();
+
+
         }
-        
+        [HttpPost]
+        public ActionResult EditRestaurant(RestaurantModel restaurant)
+        {
+            try
+            {
+                using (websitedbEntities db = new websitedbEntities())
+                {
+
+                    //foreach (Restaurant r in db.Restaurant)
+                    //{
+                    var res = db.Restaurant.Where(x => x.RestaurantID == restaurant.ResID).First();
+
+                    res.OwnerID = restaurant.OwnerID;
+                    res.RestaurantPostalCode = restaurant.RestaurantPostalCode;
+                    res.Restaurant_City = restaurant.Restaurant_City;
+                    res.Restaurant_HouseNo = restaurant.Restaurant_HouseNo;
+                    res.Restaurant_StreetName = restaurant.Restaurant_StreetName;
+
+                    db.SaveChanges();
+
+                    //r2.OwnerID = 2;
+                    //db.SaveChanges();
+                    //}
+
+                    return View(res);
+                }
+            }
+
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+                return View();
+            }
+
+
+        }
     }
 }
+
 

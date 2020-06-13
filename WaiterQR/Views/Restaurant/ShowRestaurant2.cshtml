@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WaiterQR.Models.RestaurantModel>
+
+@{
+    ViewBag.Title = "ShowRestaurant2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowRestaurant2</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RestaurantPostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Restaurant_City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Restaurant_StreetName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Restaurant_HouseNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RestaurantPostalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Restaurant_City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Restaurant_StreetName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Restaurant_HouseNo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResID })
+        </td>
+    </tr>
+}
+
+</table>
