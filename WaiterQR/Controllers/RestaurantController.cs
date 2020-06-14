@@ -12,13 +12,6 @@ namespace WaiterQR.Controllers
 {
     public class RestaurantController : Controller
     {
-        private SqlConnection con;
-        private void connection()
-        {
-            //string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
-            //con = new SqlConnection(constr);
-        }
-
         // GET: Restaurant
         public ActionResult AddRestaurant()
         {

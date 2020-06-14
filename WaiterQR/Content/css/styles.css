@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*!
 * Start Bootstrap - Freelancer v6.0.3 (https://startbootstrap.com/themes/freelancer)
 * Copyright 2013-2020 Start Bootstrap
@@ -9999,7 +9999,7 @@ h3 {
   }
 }
 .page-section {
-  padding: 6rem 0;
+  padding: 8rem 0;
 }
 .page-section .page-section-heading {
   font-size: 2.25rem;

@@ -12,18 +12,13 @@ namespace WaiterQR.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
-        {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
-        }
-    
-        public string Id { get; set; }
-        public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public int ProductID { get; set; }
+        public int RestaurantID { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
+        public string ProductPrice { get; set; }
+        public string ProductImage { get; set; }
     }
 }

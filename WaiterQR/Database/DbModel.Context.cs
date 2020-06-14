@@ -30,8 +30,8 @@ namespace WaiterQR.Database
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Restaurant> Restaurant { get; set; }
-
-        public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantModel> RestaurantModels { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
     }
 }
