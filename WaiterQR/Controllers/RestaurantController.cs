@@ -45,7 +45,8 @@ namespace WaiterQR.Controllers
                     db.SaveChanges();
                 }
 
-              
+                
+            }
 
             catch (Exception e)
             {
