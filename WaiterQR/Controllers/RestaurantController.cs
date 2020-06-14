@@ -45,17 +45,7 @@ namespace WaiterQR.Controllers
                     db.SaveChanges();
                 }
 
-                using (websitedbEntities db = new websitedbEntities())
-                {
-                    foreach (Restaurant r in db.Restaurant)
-                    {
-                        var r2 = db.Restaurant.Where(x => x.Restaurant_StreetName == "Rolshover").First();
-                        r2.OwnerID = 2;
-                        db.SaveChanges();
-                    }
-
-                }
-            }
+              
 
             catch (Exception e)
             {
@@ -67,7 +57,7 @@ namespace WaiterQR.Controllers
 
         }
 
-        public ActionResult ShowRestaurant(RestaurantModel restaurant)
+        public ActionResult ShowRestaurant()
         {
             try
             {
