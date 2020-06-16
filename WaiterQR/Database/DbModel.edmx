@@ -79,17 +79,17 @@
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
-            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="RestaurantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OwnerID" Type="int" Nullable="false" />
-          <Property Name="RestaurantPostalCode" Type="int" Nullable="false" />
-          <Property Name="Restaurant_City" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Restaurant_StreetName" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Restaurant_HouseNo" Type="int" Nullable="false" />
-          <Property Name="Restaurant_TableAmount" Type="int" Nullable="false" />
-          <Property Name="Restaurant_Name" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Restaurant_Description" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="PostalCode" Type="int" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="StreetName" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="HouseNo" Type="int" Nullable="false" />
+          <Property Name="TableAmount" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="RestaurantTable">
           <Key>
@@ -337,17 +337,17 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
-            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="RestaurantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OwnerID" Type="Int32" Nullable="false" />
-          <Property Name="RestaurantPostalCode" Type="Int32" Nullable="false" />
-          <Property Name="Restaurant_City" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Restaurant_StreetName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Restaurant_HouseNo" Type="Int32" Nullable="false" />
-          <Property Name="Restaurant_TableAmount" Type="Int32" Nullable="false" />
-          <Property Name="Restaurant_Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Restaurant_Description" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="StreetName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="HouseNo" Type="Int32" Nullable="false" />
+          <Property Name="TableAmount" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RestaurantTable">
           <Key>
@@ -492,15 +492,15 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <EntitySetMapping Name="Restaurant">
             <EntityTypeMapping TypeName="websitedbModel.Restaurant">
               <MappingFragment StoreEntitySet="Restaurant">
-                <ScalarProperty Name="Restaurant_Description" ColumnName="Restaurant_Description" />
-                <ScalarProperty Name="Restaurant_Name" ColumnName="Restaurant_Name" />
-                <ScalarProperty Name="Restaurant_TableAmount" ColumnName="Restaurant_TableAmount" />
-                <ScalarProperty Name="Restaurant_HouseNo" ColumnName="Restaurant_HouseNo" />
-                <ScalarProperty Name="Restaurant_StreetName" ColumnName="Restaurant_StreetName" />
-                <ScalarProperty Name="Restaurant_City" ColumnName="Restaurant_City" />
-                <ScalarProperty Name="RestaurantPostalCode" ColumnName="RestaurantPostalCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TableAmount" ColumnName="TableAmount" />
+                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
                 <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

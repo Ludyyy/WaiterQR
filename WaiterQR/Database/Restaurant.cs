@@ -14,14 +14,14 @@ namespace WaiterQR.Database
     
     public partial class Restaurant
     {
-        public int RestaurantID { get; set; }
+        public int ID { get; set; }
         public int OwnerID { get; set; }
-        public int RestaurantPostalCode { get; set; }
-        public string Restaurant_City { get; set; }
-        public string Restaurant_StreetName { get; set; }
-        public int Restaurant_HouseNo { get; set; }
-        public int Restaurant_TableAmount { get; set; }
-        public string Restaurant_Name { get; set; }
-        public string Restaurant_Description { get; set; }
+        public int PostalCode { get; set; }
+        public string City { get; set; }
+        public string StreetName { get; set; }
+        public int HouseNo { get; set; }
+        public int TableAmount { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
