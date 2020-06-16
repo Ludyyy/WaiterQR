@@ -28,19 +28,26 @@
 <body>
 <table>
     <tr>
+        <th>ID</th>
         <th>Restaurant</th>
+        <th>Description</th>
         <th>Owner</th>
         <th>Ort</th>
         <th>Haus</th>
+        <th>Kapazität</th>
     </tr>
     @foreach (var item in Model)
     {
 <tr>
     <td> @item.RestaurantID </td>
+    <td> @item.Restaurant_Name </td>
+    <td> @item.Restaurant_Description </td>
+    <td> @item.Restaurant_TableAmount </td>
     <td> @item.OwnerID </td>
     <td> @item.RestaurantPostalCode, @item.Restaurant_City</td>
     <td> @item.Restaurant_StreetName, @item.Restaurant_HouseNo</td>
-    <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new {item.RestaurantID},null)</td>
+    <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { item.RestaurantID }, null)</td>
+    <td>@Html.ActionLink("Edit Tables", "EditTable", "RestaurantTable", new { item.RestaurantID }, null)</td>
 </tr>
     }
 

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace WaiterQR.Models
 {
-    public class RestaurantModel
+    public class RestaurantViewModel
     {
         [Key]
         [Display(Name = "RestaurantID")]
@@ -27,7 +27,16 @@ namespace WaiterQR.Models
         public string Restaurant_StreetName { get; set; }
 
         [Required(ErrorMessage = "Restaurant_HouseNo is required.")]
-        public string Restaurant_HouseNo { get; set; }
+        public int Restaurant_HouseNo { get; set; }
+
+        [Required(ErrorMessage = "Restaurant_TableAmount is required.")]
+        public int Restaurant_TableAmount { get; set; }
+
+        [Required(ErrorMessage = "Restaurant_Name is required.")]
+        public string Restaurant_Name { get; set; }
+
+        [Required(ErrorMessage = "Restaurant_Description is required.")]
+        public string Restaurant_Description { get; set; }
 
     }
 

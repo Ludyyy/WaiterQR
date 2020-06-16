@@ -12,16 +12,13 @@ namespace WaiterQR.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Restaurant
+    public partial class database_firewall_rules
     {
-        public int RestaurantID { get; set; }
-        public int OwnerID { get; set; }
-        public int RestaurantPostalCode { get; set; }
-        public string Restaurant_City { get; set; }
-        public string Restaurant_StreetName { get; set; }
-        public int Restaurant_HouseNo { get; set; }
-        public int Restaurant_TableAmount { get; set; }
-        public string Restaurant_Name { get; set; }
-        public string Restaurant_Description { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

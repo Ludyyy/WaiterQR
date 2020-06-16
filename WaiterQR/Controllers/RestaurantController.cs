@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
+using System.Windows.Media.Animation;
 using WaiterQR.Database;
 using WaiterQR.Models;
 
@@ -18,7 +19,7 @@ namespace WaiterQR.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddRestaurant(RestaurantModel restaurants)
+        public ActionResult AddRestaurant(RestaurantViewModel restaurants)
         {
             try
             {
@@ -31,14 +32,18 @@ namespace WaiterQR.Controllers
                     restaurant.Restaurant_City = restaurants.Restaurant_City;
                     restaurant.Restaurant_StreetName = restaurants.Restaurant_StreetName;
                     restaurant.Restaurant_HouseNo = restaurants.Restaurant_HouseNo;
-
-
+                    restaurant.Restaurant_TableAmount = restaurants.Restaurant_TableAmount;
+                    restaurant.Restaurant_Name = restaurants.Restaurant_Name;
+                    restaurant.Restaurant_Description = restaurants.Restaurant_Description;
 
                     db.Restaurant.Add(restaurant);
                     db.SaveChanges();
+
+                    //int addedrestaurantid = db.Restaurant.Select(q => q.RestaurantID).Max();
+
+                    //TableCreator(addedrestaurantid, restaurant.Restaurant_TableAmount);
                 }
 
-                
             }
 
             catch (Exception e)
@@ -83,12 +88,12 @@ namespace WaiterQR.Controllers
                 try
                 {
                     websitedbEntities db = new websitedbEntities();
-                    
+
 
                     var res = db.Restaurant.SingleOrDefault(x => x.RestaurantID == restaurantid);
 
                     return View(res);
-                    
+
                 }
 
                 catch (Exception e)
@@ -104,27 +109,30 @@ namespace WaiterQR.Controllers
 
         }
         [HttpPost]
-        public ActionResult EditRestaurant(Restaurant restaurant)
+        public ActionResult EditRestaurant(Restaurant restaurants)
         {
             try
             {
                 websitedbEntities db = new websitedbEntities();
-                
 
-                
-                Restaurant res = db.Restaurant.SingleOrDefault(x => x.RestaurantID == restaurant.RestaurantID);
 
-                res.OwnerID = restaurant.OwnerID;
-                res.RestaurantPostalCode = restaurant.RestaurantPostalCode;
-                res.Restaurant_City = restaurant.Restaurant_City;
-                res.Restaurant_HouseNo = restaurant.Restaurant_HouseNo;
-                res.Restaurant_StreetName = restaurant.Restaurant_StreetName;
+
+                Restaurant restaurant = db.Restaurant.SingleOrDefault(x => x.RestaurantID == restaurants.RestaurantID);
+
+                restaurant.OwnerID = restaurants.OwnerID;
+                restaurant.RestaurantPostalCode = restaurants.RestaurantPostalCode;
+                restaurant.Restaurant_City = restaurants.Restaurant_City;
+                restaurant.Restaurant_StreetName = restaurants.Restaurant_StreetName;
+                restaurant.Restaurant_HouseNo = restaurants.Restaurant_HouseNo;
+                restaurant.Restaurant_TableAmount = restaurants.Restaurant_TableAmount;
+                restaurant.Restaurant_Name = restaurants.Restaurant_Name;
+                restaurant.Restaurant_Description = restaurants.Restaurant_Description;
 
                 db.SaveChanges();
 
                 ViewBag.message = "Restaurant information updated successfully.";
-                return View(res);
-                
+                return View(restaurant);
+
             }
 
             catch (Exception e)
@@ -136,7 +144,43 @@ namespace WaiterQR.Controllers
 
 
         }
+
+        public static void TableCreator(int restaurant_Id, int capacity)
+        {
+
+            try
+            {
+                using (websitedbEntities db = new websitedbEntities())
+                {
+                    RestaurantTable rt = new RestaurantTable();
+
+                    int i = 1;
+                    int k = capacity;
+                    while (i <= k)
+                    {
+                        rt.Restaurant_ID = restaurant_Id;
+                        rt.RestaurantTable_ID = i;
+                        rt.RestaurantTable_Occupied = false;
+
+                        db.RestaurantTable.Add(rt);
+                        db.SaveChanges();
+
+                        i++;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+            }
+
+        }
+
+
     }
+
+
 }
 
 

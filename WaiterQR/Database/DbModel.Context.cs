@@ -12,6 +12,8 @@ namespace WaiterQR.Database
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class websitedbEntities : DbContext
     {
@@ -32,6 +34,37 @@ namespace WaiterQR.Database
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Restaurant> Restaurant { get; set; }
+        public virtual DbSet<RestaurantTable> RestaurantTable { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
+        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+    
+        public virtual int AddNewRestaurantsDetails(Nullable<int> restaurant_Id, string owner_LastName, string owner_FirstName, string restaurant_City, Nullable<int> restaurant_PostalCode, string restaurant_StreetName)
+        {
+            var restaurant_IdParameter = restaurant_Id.HasValue ?
+                new ObjectParameter("Restaurant_Id", restaurant_Id) :
+                new ObjectParameter("Restaurant_Id", typeof(int));
+    
+            var owner_LastNameParameter = owner_LastName != null ?
+                new ObjectParameter("Owner_LastName", owner_LastName) :
+                new ObjectParameter("Owner_LastName", typeof(string));
+    
+            var owner_FirstNameParameter = owner_FirstName != null ?
+                new ObjectParameter("Owner_FirstName", owner_FirstName) :
+                new ObjectParameter("Owner_FirstName", typeof(string));
+    
+            var restaurant_CityParameter = restaurant_City != null ?
+                new ObjectParameter("Restaurant_City", restaurant_City) :
+                new ObjectParameter("Restaurant_City", typeof(string));
+    
+            var restaurant_PostalCodeParameter = restaurant_PostalCode.HasValue ?
+                new ObjectParameter("Restaurant_PostalCode", restaurant_PostalCode) :
+                new ObjectParameter("Restaurant_PostalCode", typeof(int));
+    
+            var restaurant_StreetNameParameter = restaurant_StreetName != null ?
+                new ObjectParameter("Restaurant_StreetName", restaurant_StreetName) :
+                new ObjectParameter("Restaurant_StreetName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewRestaurantsDetails", restaurant_IdParameter, owner_LastNameParameter, owner_FirstNameParameter, restaurant_CityParameter, restaurant_PostalCodeParameter, restaurant_StreetNameParameter);
+        }
     }
 }

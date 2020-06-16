@@ -9,7 +9,7 @@ using System.Web;
 
 namespace WaiterQR.Models
 {
-    public class ProductModel
+    public class ProductViewModel
     {
         [Key]
         [Display(Name = "ProductID")]

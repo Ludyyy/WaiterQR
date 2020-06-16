@@ -84,9 +84,21 @@
           <Property Name="RestaurantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OwnerID" Type="int" Nullable="false" />
           <Property Name="RestaurantPostalCode" Type="int" Nullable="false" />
-          <Property Name="Restaurant_City" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="Restaurant_StreetName" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="Restaurant_HouseNo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Restaurant_City" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Restaurant_StreetName" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Restaurant_HouseNo" Type="int" Nullable="false" />
+          <Property Name="Restaurant_TableAmount" Type="int" Nullable="false" />
+          <Property Name="Restaurant_Name" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Restaurant_Description" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RestaurantTable">
+          <Key>
+            <PropertyRef Name="Restaurant_ID" />
+            <PropertyRef Name="RestaurantTable_ID" />
+          </Key>
+          <Property Name="Restaurant_ID" Type="int" Nullable="false" />
+          <Property Name="RestaurantTable_ID" Type="int" Nullable="false" />
+          <Property Name="RestaurantTable_Occupied" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
@@ -96,6 +108,24 @@
           <Property Name="UserID" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="ProductID" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="ProductCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -153,6 +183,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddNewRestaurantsDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Restaurant_Id" Type="int" Mode="In" />
+          <Parameter Name="Owner_LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Owner_FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="Restaurant_City" Type="varchar" Mode="In" />
+          <Parameter Name="Restaurant_PostalCode" Type="int" Mode="In" />
+          <Parameter Name="Restaurant_StreetName" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="websitedbModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -162,7 +200,18 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RestaurantTable" EntityType="Self.RestaurantTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -185,6 +234,14 @@
     <edmx:ConceptualModels>
       <Schema Namespace="websitedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="websitedbEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="AddNewRestaurantsDetails">
+            <Parameter Name="Restaurant_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Owner_LastName" Mode="In" Type="String" />
+            <Parameter Name="Owner_FirstName" Mode="In" Type="String" />
+            <Parameter Name="Restaurant_City" Mode="In" Type="String" />
+            <Parameter Name="Restaurant_PostalCode" Mode="In" Type="Int32" />
+            <Parameter Name="Restaurant_StreetName" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="C__MigrationHistory" EntityType="websitedbModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="websitedbModel.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="websitedbModel.AspNetUserClaims" />
@@ -192,7 +249,9 @@
           <EntitySet Name="AspNetUsers" EntityType="websitedbModel.AspNetUsers" />
           <EntitySet Name="Product" EntityType="websitedbModel.Product" />
           <EntitySet Name="Restaurant" EntityType="websitedbModel.Restaurant" />
+          <EntitySet Name="RestaurantTable" EntityType="websitedbModel.RestaurantTable" />
           <EntitySet Name="ShoppingCart" EntityType="websitedbModel.ShoppingCart" />
+          <EntitySet Name="database_firewall_rules" EntityType="websitedbModel.database_firewall_rules" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="websitedbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -283,9 +342,21 @@
           <Property Name="RestaurantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OwnerID" Type="Int32" Nullable="false" />
           <Property Name="RestaurantPostalCode" Type="Int32" Nullable="false" />
-          <Property Name="Restaurant_City" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Restaurant_StreetName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Restaurant_HouseNo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Restaurant_City" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Restaurant_StreetName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Restaurant_HouseNo" Type="Int32" Nullable="false" />
+          <Property Name="Restaurant_TableAmount" Type="Int32" Nullable="false" />
+          <Property Name="Restaurant_Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Restaurant_Description" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RestaurantTable">
+          <Key>
+            <PropertyRef Name="Restaurant_ID" />
+            <PropertyRef Name="RestaurantTable_ID" />
+          </Key>
+          <Property Name="Restaurant_ID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantTable_ID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantTable_Occupied" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
@@ -295,6 +366,22 @@
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="ProductID" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="ProductCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="websitedbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
@@ -328,12 +415,13 @@
           <End Type="websitedbModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="websitedbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="websitedbModelStoreContainer" CdmEntityContainer="websitedbEntities">
+          <FunctionImportMapping FunctionImportName="AddNewRestaurantsDetails" FunctionName="websitedbModel.Store.AddNewRestaurantsDetails" />
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="websitedbModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -404,12 +492,24 @@
           <EntitySetMapping Name="Restaurant">
             <EntityTypeMapping TypeName="websitedbModel.Restaurant">
               <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="Restaurant_Description" ColumnName="Restaurant_Description" />
+                <ScalarProperty Name="Restaurant_Name" ColumnName="Restaurant_Name" />
+                <ScalarProperty Name="Restaurant_TableAmount" ColumnName="Restaurant_TableAmount" />
                 <ScalarProperty Name="Restaurant_HouseNo" ColumnName="Restaurant_HouseNo" />
                 <ScalarProperty Name="Restaurant_StreetName" ColumnName="Restaurant_StreetName" />
                 <ScalarProperty Name="Restaurant_City" ColumnName="Restaurant_City" />
                 <ScalarProperty Name="RestaurantPostalCode" ColumnName="RestaurantPostalCode" />
                 <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
                 <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantTable">
+            <EntityTypeMapping TypeName="websitedbModel.RestaurantTable">
+              <MappingFragment StoreEntitySet="RestaurantTable">
+                <ScalarProperty Name="RestaurantTable_Occupied" ColumnName="RestaurantTable_Occupied" />
+                <ScalarProperty Name="RestaurantTable_ID" ColumnName="RestaurantTable_ID" />
+                <ScalarProperty Name="Restaurant_ID" ColumnName="Restaurant_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -423,6 +523,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="websitedbModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="websitedbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -431,7 +543,7 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

@@ -32,7 +32,7 @@ namespace WaiterQR.Models
 
         public System.Data.Entity.DbSet<WaiterQR.Models.ApplicationUser> ApplicationUsers { get; set; }
 
-        public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantModel> RestaurantModels { get; set; }
+        public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantViewModel> RestaurantModels { get; set; }
 
         public System.Data.Entity.DbSet<WaiterQR.Database.Restaurant> Restaurants { get; set; }
     }
