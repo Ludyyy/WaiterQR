@@ -93,12 +93,11 @@
         </EntityType>
         <EntityType Name="RestaurantTable">
           <Key>
-            <PropertyRef Name="Restaurant_ID" />
-            <PropertyRef Name="RestaurantTable_ID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Restaurant_ID" Type="int" Nullable="false" />
-          <Property Name="RestaurantTable_ID" Type="int" Nullable="false" />
-          <Property Name="RestaurantTable_Occupied" Type="bit" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="RestaurantSeat" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
@@ -351,12 +350,11 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
         </EntityType>
         <EntityType Name="RestaurantTable">
           <Key>
-            <PropertyRef Name="Restaurant_ID" />
-            <PropertyRef Name="RestaurantTable_ID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Restaurant_ID" Type="Int32" Nullable="false" />
-          <Property Name="RestaurantTable_ID" Type="Int32" Nullable="false" />
-          <Property Name="RestaurantTable_Occupied" Type="Boolean" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantSeat" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
@@ -507,9 +505,9 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <EntitySetMapping Name="RestaurantTable">
             <EntityTypeMapping TypeName="websitedbModel.RestaurantTable">
               <MappingFragment StoreEntitySet="RestaurantTable">
-                <ScalarProperty Name="RestaurantTable_Occupied" ColumnName="RestaurantTable_Occupied" />
-                <ScalarProperty Name="RestaurantTable_ID" ColumnName="RestaurantTable_ID" />
-                <ScalarProperty Name="Restaurant_ID" ColumnName="Restaurant_ID" />
+                <ScalarProperty Name="RestaurantSeat" ColumnName="RestaurantSeat" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

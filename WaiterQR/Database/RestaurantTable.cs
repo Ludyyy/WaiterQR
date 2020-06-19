@@ -14,8 +14,8 @@ namespace WaiterQR.Database
     
     public partial class RestaurantTable
     {
-        public int Restaurant_ID { get; set; }
-        public int RestaurantTable_ID { get; set; }
-        public bool RestaurantTable_Occupied { get; set; }
+        public int ID { get; set; }
+        public int RestaurantID { get; set; }
+        public int RestaurantSeat { get; set; }
     }
 }

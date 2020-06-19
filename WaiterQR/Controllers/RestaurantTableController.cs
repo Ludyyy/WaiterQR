@@ -10,10 +10,33 @@ namespace WaiterQR.Controllers
     public class RestaurantTableController : Controller
     {
         // GET: RestaurantTable
-        public ActionResult EditRestarauntTable(int restaurant_id)
+        public ActionResult ShowRestarauntTable(int restaurantid)
         {
+            try
+            {
+                var tempList = new List<RestaurantTable>();
+                using (websitedbEntities db = new websitedbEntities())
+                {
+                    foreach (RestaurantTable rt in db.RestaurantTable)
+                    {
+                        if (rt.RestaurantID == restaurantid)
+                        {
+                            tempList.Add(rt);
+                        }
+                        
+                    }
+                }
+                return View(tempList);
+            }
 
-            return View(restaurant_id);
+
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+                return View();
+
+            }        
         }
 
         //    [HttpPost]

@@ -27,7 +27,7 @@ namespace WaiterQR.Controllers
                 {
 
                     Restaurant restaurant = new Restaurant();
-                    restaurant.ID = db.Restaurant.Count()+1;
+                    restaurant.ID = db.Restaurant.Count() + 1;
                     restaurant.OwnerID = restaurants.OwnerID;
                     restaurant.PostalCode = restaurants.RestaurantPostalCode;
                     restaurant.City = restaurants.Restaurant_City;
@@ -37,14 +37,29 @@ namespace WaiterQR.Controllers
                     restaurant.Name = restaurants.Restaurant_Name;
                     restaurant.Description = restaurants.Restaurant_Description;
 
-                    TableCreator(restaurant.ID, restaurant.TableAmount);
+                    // TableCreator(restaurant.ID, restaurant.TableAmount);
+                    RestaurantTable rs = new RestaurantTable();
 
+
+                    int i = 1;
+                    int k = restaurant.TableAmount;
+                    while (i <= k)
+                    {
+                        rs.RestaurantID = restaurant.ID;
+                        rs.RestaurantSeat = i;
+
+
+                        db.RestaurantTable.Add(rs);
+                        db.SaveChanges();
+
+                        i++;
+                    }
 
                     db.Restaurant.Add(restaurant);
                     db.SaveChanges();
-                    
 
-                   
+
+
                 }
 
             }
@@ -106,11 +121,15 @@ namespace WaiterQR.Controllers
                     return View();
                 }
 
+                return View();
             }
-            return View();
+            else
+            {
+                return View();
+            }
 
 
-        }
+    }
         [HttpPost]
         public ActionResult EditRestaurant(Restaurant restaurants)
         {
@@ -148,32 +167,7 @@ namespace WaiterQR.Controllers
 
         }
 
-        public static void TableCreator(int restaurant_Id, int capacity)
-        {
-            using(websitedbEntities db = new websitedbEntities())
-                {
-
-                RestaurantTable rt = new RestaurantTable();
-
-                int i = 1;
-                int k = capacity;
-                while (i <= k)
-                {
-                    rt.Restaurant_ID = restaurant_Id;
-                    rt.RestaurantTable_ID = i;
-                    rt.RestaurantTable_Occupied = false;
-                    i++;
-
-                    db.RestaurantTable.Add(rt);
-                    db.SaveChanges();
-
-                }
-
-            }
-            
-
-        }
-
+        
 
     }
 

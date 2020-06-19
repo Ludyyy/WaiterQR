@@ -1,10 +1,11 @@
-﻿@model @model List<WaiterQR.Database.Restaurant>
+﻿@model List<WaiterQR.Database.RestaurantTable>
+
 @{
-    ViewBag.Title = "ShowRestaurant";
+    ViewBag.Title = "ShowRestarauntTable";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EditRestarauntTable</h2>
+<h2>ShowRestarauntTable</h2>
 
 <!DOCTYPE html>
 
@@ -28,26 +29,17 @@
 <body>
     <table>
         <tr>
-            <th>ID</th>
             <th>Restaurant</th>
-            <th>Description</th>
-            <th>Owner</th>
-            <th>Ort</th>
-            <th>Haus</th>
-            <th>Kapazität</th>
+            <th>Table</th>
+            
         </tr>
         @foreach (var item in Model)
         {
             <tr>
                 <td> @item.RestaurantID </td>
-                <td> @item.Restaurant_Name </td>
-                <td> @item.Restaurant_Description </td>
-                <td> @item.Restaurant_TableAmount </td>
-                <td> @item.OwnerID </td>
-                <td> @item.RestaurantPostalCode, @item.Restaurant_City</td>
-                <td> @item.Restaurant_StreetName, @item.Restaurant_HouseNo</td>
-                <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { item.RestaurantID }, null)</td>
-                <td>@Html.ActionLink("Edit Tables", "EditTable", "RestaurantTable", new { item.RestaurantID }, null)</td>
+                <td> @item.RestaurantSeat </td>
+               
+                <td>@Html.ActionLink("Show QR Code", "CreateQRCOde", "QrCode", new { restaurantid = item.RestaurantID,restauranttable=item.RestaurantSeat}, null)</td>
             </tr>
         }
 

@@ -29,25 +29,26 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>Restaurant</th>
+        <th>Name</th>
         <th>Description</th>
+        <th>Capacity</th>
         <th>Owner</th>
-        <th>Ort</th>
-        <th>Haus</th>
-        <th>Kapazität</th>
+        <th>Location</th>
+        <th>House</th>
+  
     </tr>
     @foreach (var item in Model)
     {
 <tr>
-    <td> @item.RestaurantID </td>
-    <td> @item.Restaurant_Name </td>
-    <td> @item.Restaurant_Description </td>
-    <td> @item.Restaurant_TableAmount </td>
+    <td> @item.ID </td>
+    <td> @item.Name </td>
+    <td> @item.Description </td>
+    <td> @item.TableAmount </td>
     <td> @item.OwnerID </td>
-    <td> @item.RestaurantPostalCode, @item.Restaurant_City</td>
-    <td> @item.Restaurant_StreetName, @item.Restaurant_HouseNo</td>
-    <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { item.RestaurantID }, null)</td>
-    <td>@Html.ActionLink("Edit Tables", "EditTable", "RestaurantTable", new { item.RestaurantID }, null)</td>
+    <td> @item.PostalCode, @item.City</td>
+    <td> @item.StreetName, @item.HouseNo</td>
+    <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { restaurantid = item.ID }, null)</td>
+    <td>@Html.ActionLink("Show Tables", "ShowRestarauntTable", "RestaurantTable", new { restaurantid = item.ID }, null)</td>
 </tr>
     }
 
