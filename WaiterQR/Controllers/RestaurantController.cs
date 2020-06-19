@@ -121,7 +121,6 @@ namespace WaiterQR.Controllers
                     return View();
                 }
 
-                return View();
             }
             else
             {
