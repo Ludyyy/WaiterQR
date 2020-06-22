@@ -1,0 +1,55 @@
+﻿@model WaiterQR.Models.RestaurantTableViewModel
+
+@{
+    ViewBag.Title = "ShowRestaurantTable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowRestarauntTable</h2>
+<h3>Currently you registered @Model.RestaurantTables.Count tables </h3>
+
+<h3>
+    <button>@Html.ActionLink("Edit", "EditRestaurantTable", "RestaurantTable", new { restaurantid = Model.ResID}, null)</button>
+</h3>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        td, th {
+            text-align: center;
+            padding: 15px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Restaurant</th>
+            <th>Table</th>
+            
+        </tr>
+        @foreach (var item in Model.RestaurantTables)
+        {
+    <tr>
+        <td> @item.RestaurantID </td>
+        <td> @item.RestaurantSeat </td>
+
+        <td>@Html.ActionLink("Show QR Code", "CreateQRCOde", "QrCode", new { restaurantid = item.RestaurantID, restauranttable = item.RestaurantSeat }, null)</td>
+    </tr>
+        }
+
+    </table>
+
+</body>
+</html>

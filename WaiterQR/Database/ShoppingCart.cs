@@ -14,9 +14,10 @@ namespace WaiterQR.Database
     
     public partial class ShoppingCart
     {
+        public int ID { get; set; }
         public int ShoppingCartID { get; set; }
-        public string UserID { get; set; }
-        public string ProductID { get; set; }
+        public int UserID { get; set; }
+        public int ProductID { get; set; }
         public int ProductCount { get; set; }
     }
 }

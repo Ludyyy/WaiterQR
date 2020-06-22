@@ -19,7 +19,7 @@ namespace WaiterQR.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddRestaurant(RestaurantViewModel restaurants)
+        public ActionResult AddRestaurant(Restaurant restaurants)
         {
             try
             {
@@ -27,38 +27,40 @@ namespace WaiterQR.Controllers
                 {
 
                     Restaurant restaurant = new Restaurant();
-                    restaurant.ID = db.Restaurant.Count() + 1;
+
+                    
                     restaurant.OwnerID = restaurants.OwnerID;
-                    restaurant.PostalCode = restaurants.RestaurantPostalCode;
-                    restaurant.City = restaurants.Restaurant_City;
-                    restaurant.StreetName = restaurants.Restaurant_StreetName;
-                    restaurant.HouseNo = restaurants.Restaurant_HouseNo;
-                    restaurant.TableAmount = restaurants.Restaurant_TableAmount;
-                    restaurant.Name = restaurants.Restaurant_Name;
-                    restaurant.Description = restaurants.Restaurant_Description;
+                    restaurant.PostalCode = restaurants.PostalCode;
+                    restaurant.City = restaurants.City;
+                    restaurant.StreetName = restaurants.StreetName;
+                    restaurant.HouseNo = restaurants.HouseNo;
+                    restaurant.TableAmount = 0;
+                    restaurant.Name = restaurants.Name;
+                    restaurant.Description = restaurants.Description;
 
-                    // TableCreator(restaurant.ID, restaurant.TableAmount);
-                    RestaurantTable rs = new RestaurantTable();
-
-
-                    int i = 1;
-                    int k = restaurant.TableAmount;
-                    while (i <= k)
-                    {
-                        rs.RestaurantID = restaurant.ID;
-                        rs.RestaurantSeat = i;
-
-
-                        db.RestaurantTable.Add(rs);
-                        db.SaveChanges();
-
-                        i++;
-                    }
+                   
 
                     db.Restaurant.Add(restaurant);
                     db.SaveChanges();
 
+                    ////TableCreator(restaurant.ID, restaurant.TableAmount);
+                    //RestaurantTable rs = new RestaurantTable();
 
+
+                    //int i = 1;
+                    //int k = restaurant.TableAmount;
+                    //int c = db.Restaurant.Count() + 1;
+                    //while (i <= k)
+                    //{
+                    //    rs.RestaurantID = c;
+                    //    rs.RestaurantSeat = i;
+
+
+                    //    db.RestaurantTable.Add(rs);
+                    //    db.SaveChanges();
+
+                    //    i++;
+                    //}
 
                 }
 

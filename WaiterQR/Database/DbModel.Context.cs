@@ -66,5 +66,7 @@ namespace WaiterQR.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewRestaurantsDetails", restaurant_IdParameter, owner_LastNameParameter, owner_FirstNameParameter, restaurant_CityParameter, restaurant_PostalCodeParameter, restaurant_StreetNameParameter);
         }
+
+        public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantTableViewModel> RestaurantTableViewModels { get; set; }
     }
 }

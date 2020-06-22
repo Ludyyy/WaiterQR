@@ -18,25 +18,25 @@ namespace WaiterQR.Models
         public int OwnerID { get; set; }
 
         [Required(ErrorMessage = "RestaurantPostalCode is required.")]
-        public int RestaurantPostalCode { get; set; }
+        public int PostalCode { get; set; }
 
         [Required(ErrorMessage = "Restaurant_City is required.")]
-        public string Restaurant_City { get; set; }
+        public string City { get; set; }
 
         [Required(ErrorMessage = "Restaurant_StreetName is required.")]
-        public string Restaurant_StreetName { get; set; }
+        public string StreetName { get; set; }
 
         [Required(ErrorMessage = "Restaurant_HouseNo is required.")]
-        public int Restaurant_HouseNo { get; set; }
+        public int HouseNo { get; set; }
 
         [Required(ErrorMessage = "Restaurant_TableAmount is required.")]
-        public int Restaurant_TableAmount { get; set; }
+        public int TableAmount { get; set; }
 
         [Required(ErrorMessage = "Restaurant_Name is required.")]
-        public string Restaurant_Name { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Restaurant_Description is required.")]
-        public string Restaurant_Description { get; set; }
+        public string Description { get; set; }
 
     }
 

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WaiterQR.Database;
+using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
     public class RestaurantTableController : Controller
     {
         // GET: RestaurantTable
-        public ActionResult ShowRestarauntTable(int restaurantid)
+        public ActionResult ShowRestaurantTable(int restaurantid)
         {
             try
             {
@@ -26,7 +27,10 @@ namespace WaiterQR.Controllers
                         
                     }
                 }
-                return View(tempList);
+                RestaurantTableViewModel rtvw = new RestaurantTableViewModel();
+                rtvw.ResID = restaurantid;
+                rtvw.RestaurantTables = tempList;
+                return View(rtvw);
             }
 
 
@@ -39,62 +43,83 @@ namespace WaiterQR.Controllers
             }        
         }
 
-        //    [HttpPost]
-        //    public ActionResult AddRestarauntTable(RestaurantTableController restaurantTables)
-        //    {
-        //        try
-        //        {
-        //            using (websitedbEntities db = new websitedbEntities())
-        //            {
-                                          
-        //                RestaurantTable table = new RestaurantTable();
 
-        //                table.Restaurant_ID = restaurantTables.ResID;
-        //                int i = 0;
-        //                while (i >= 0)
-        //                {
-        //                    table.RestaurantTable_ID = i;
-        //                    table.RestaurantTable_Occupied = false;
-        //                }
+        public ActionResult EditRestaurantTable(int restaurantid)
+        {
+            try
+            {
+                var tempList = new List<RestaurantTable>();
+                int tableamount = 0;
+                using (websitedbEntities db = new websitedbEntities())
+                {              
+                    tableamount = db.RestaurantTable.Where(x => x.RestaurantID == restaurantid).Count();
 
-        //                table.RestaurantTable_Seats = 4;
+                }
+                RestaurantTableViewModel rv = new RestaurantTableViewModel();
+                rv.ResID = restaurantid;
+                rv.capacity = tableamount;
+                return View(rv);
 
-        //                db.Restaurant.Add(restaurant);
-        //                db.SaveChanges();
-        //            }
+            }
 
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
 
-        //        }
+            }
+            return View();
 
-        //        catch (Exception e)
-        //        {
-        //            string s = string.Format("Fehler: {0}", e.Message);
-        //            s = string.Format("Typ: {0}", e.GetType());
-
-        //        }
-        //        return View();
-
-        //    }
         }
+
+        [HttpPost]
+        public ActionResult EditRestaurantTable(RestaurantTableViewModel restaurantTableViewModel)
+        {
+            try
+            {
+                var tempList = new List<RestaurantTable>();
+                int tableamount = 0;
+                using (websitedbEntities db = new websitedbEntities())
+                {
+                    int resid = restaurantTableViewModel.ResID;
+                    tableamount = db.RestaurantTable.Where(x => x.RestaurantID == restaurantTableViewModel.ResID).Count();
+
+                    if (tableamount < restaurantTableViewModel.capacity)
+                    {
+
+                        while (tableamount < restaurantTableViewModel.capacity)
+                        {
+                            RestaurantTable rt = new RestaurantTable();
+                            rt.RestaurantID = restaurantTableViewModel.ResID;
+                            rt.RestaurantSeat = tableamount + 1;
+                            tableamount = tableamount + 1;
+
+                            db.RestaurantTable.Add(rt);
+                            db.SaveChanges();
+                        }
+                       
+
+                    }
+                    if (tableamount > restaurantTableViewModel.capacity)
+                    {
+
+                    }
+                    if (tableamount == restaurantTableViewModel.capacity)
+                    {
+
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+
+            }
+            return View();
+
+        }
+
+    }
 }
-
-//public static void TableCreator(Restaurant restaurant, websitedbEntities db)
-//{
-//    RestaurantTable rt = new RestaurantTable();
-
-//    int i = 1;
-//    int k = restaurant.Restaurant_TableAmount;
-//    while (i <= k)
-//    {
-//        rt.Restaurant_ID = 1;
-//        rt.RestaurantTable_ID = i;
-//        rt.RestaurantTable_Occupied = false;
-
-//        db.RestaurantTable.Add(rt);
-//        db.SaveChanges();
-
-//        i++;
-//    }
-
-
-//}

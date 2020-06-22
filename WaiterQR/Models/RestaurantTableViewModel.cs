@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WaiterQR.Database;
 
 namespace WaiterQR.Models
 {
@@ -20,6 +21,9 @@ namespace WaiterQR.Models
         [Required(ErrorMessage = "RestaurantTable_Occupied is required.")]
         public Boolean RestaurantTable_Occupied { get; set; }
 
+        public List<RestaurantTable> RestaurantTables { get; set; }
+
+        public int capacity { get; set; }
     }
 
 }

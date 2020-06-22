@@ -31,7 +31,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Capacity</th>
+ 
         <th>Owner</th>
         <th>Location</th>
         <th>House</th>
@@ -43,12 +43,12 @@
     <td> @item.ID </td>
     <td> @item.Name </td>
     <td> @item.Description </td>
-    <td> @item.TableAmount </td>
+
     <td> @item.OwnerID </td>
     <td> @item.PostalCode, @item.City</td>
     <td> @item.StreetName, @item.HouseNo</td>
     <td>@Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { restaurantid = item.ID }, null)</td>
-    <td>@Html.ActionLink("Show Tables", "ShowRestarauntTable", "RestaurantTable", new { restaurantid = item.ID }, null)</td>
+    <td>@Html.ActionLink("Show Tables", "ShowRestaurantTable", "RestaurantTable", new { restaurantid = item.ID }, null)</td>
 </tr>
     }
 
