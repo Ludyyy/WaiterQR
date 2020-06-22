@@ -41,7 +41,8 @@ namespace WaiterQR.Controllers
             }
         }
 
-        
+      
+
         // GET: Product/Create
         public ActionResult AddProduct()
         {

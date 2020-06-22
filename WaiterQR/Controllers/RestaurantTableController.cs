@@ -81,7 +81,7 @@ namespace WaiterQR.Controllers
                 int tableamount = 0;
                 using (websitedbEntities db = new websitedbEntities())
                 {
-                    int resid = restaurantTableViewModel.ResID;
+
                     tableamount = db.RestaurantTable.Where(x => x.RestaurantID == restaurantTableViewModel.ResID).Count();
 
                     if (tableamount < restaurantTableViewModel.capacity)
@@ -97,16 +97,39 @@ namespace WaiterQR.Controllers
                             db.RestaurantTable.Add(rt);
                             db.SaveChanges();
                         }
-                       
+                        ViewBag.message = "Succesfully increased to" + restaurantTableViewModel.capacity + "tables";
 
                     }
                     if (tableamount > restaurantTableViewModel.capacity)
                     {
+                        List<RestaurantTable> tableList = db.RestaurantTable.ToList();
+
+                        foreach (RestaurantTable rt in tableList)
+                        {
+                            if(rt.RestaurantID == restaurantTableViewModel.ResID)
+                            {                      
+                              db.RestaurantTable.Remove(rt);
+                              db.SaveChanges();
+                            }
+                        }
+
+                        tableamount = 0;
+                        while (tableamount < restaurantTableViewModel.capacity)
+                        {
+                            RestaurantTable rt = new RestaurantTable();
+                            rt.RestaurantID = restaurantTableViewModel.ResID;
+                            rt.RestaurantSeat = tableamount + 1;
+                            tableamount = tableamount + 1;
+
+                            db.RestaurantTable.Add(rt);
+                            db.SaveChanges();
+                        }
+                        ViewBag.message = "Succesfully decreased to"+ restaurantTableViewModel.capacity + "tables";
 
                     }
                     if (tableamount == restaurantTableViewModel.capacity)
                     {
-
+                        ViewBag.message = "Please give a different table capacity number than the current one";
                     }
                 }
             }

@@ -24,11 +24,13 @@ namespace WaiterQR.Controllers
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText,QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            ViewBag.message = qrText;
             return View(BitmapToBytes(qrCodeImage));
         }
 
         private static Byte[] BitmapToBytes(Bitmap img)
         {
+           
             using (MemoryStream stream = new MemoryStream())
             {
                 img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);

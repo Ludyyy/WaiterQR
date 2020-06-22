@@ -33,6 +33,12 @@
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+    <div>
+        @if (ViewBag.message != null)
+        {
+            <h4>@ViewBag.message</h4>
+        }
+    </div>
 </div>
 }
 
