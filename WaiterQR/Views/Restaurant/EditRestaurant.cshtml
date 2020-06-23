@@ -14,6 +14,7 @@
 <div class="form-horizontal">
     <h4>Restaurant</h4>
     <hr />
+    @Html.HiddenFor(model => model.ID)
 
     <div class="form-group">
         @Html.LabelFor(model => model.OwnerID, htmlAttributes: new { @class = "control-label col-md-2" })

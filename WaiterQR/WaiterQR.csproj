@@ -354,7 +354,7 @@
     <Content Include="Views\RestaurantTable\ShowRestaurantTable.cshtml" />
     <Content Include="Views\RestaurantTable\EditRestaurantTable.cshtml" />
     <Content Include="Views\Menu\ShowMenu.cshtml" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

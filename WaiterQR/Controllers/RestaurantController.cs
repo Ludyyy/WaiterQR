@@ -140,7 +140,7 @@ namespace WaiterQR.Controllers
 
 
 
-                Restaurant restaurant = db.Restaurant.SingleOrDefault(x => x.ID == restaurants.ID);
+                Restaurant restaurant = db.Restaurant.Find(restaurants.ID);
 
                 restaurant.OwnerID = restaurants.OwnerID;
                 restaurant.PostalCode = restaurants.PostalCode;

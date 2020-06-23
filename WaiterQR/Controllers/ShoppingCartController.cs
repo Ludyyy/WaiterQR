@@ -13,7 +13,7 @@ namespace WaiterQR.Controllers
     {
         // GET: ShoppingCart
 
-        public ActionResult Index()
+        public ActionResult ShowShoppingCart()
         {
             return View();
         }
@@ -51,7 +51,7 @@ namespace WaiterQR.Controllers
 
             }
 
-            return View("Index");
+            return View("ShowShoppingCart");
 
         }
         private int isExistingCheck(int? id)
@@ -73,7 +73,7 @@ namespace WaiterQR.Controllers
             int check = isExistingCheck(id);
             List<ShoppingCartViewModel> lsCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
             lsCart.RemoveAt(check);
-            return View("Index");
+            return View("ShowShoppingCart");
         }
     }
 }
