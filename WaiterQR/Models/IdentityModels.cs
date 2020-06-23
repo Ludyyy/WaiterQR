@@ -39,5 +39,7 @@ namespace WaiterQR.Models
         public System.Data.Entity.DbSet<WaiterQR.Database.RestaurantTable> RestaurantTables { get; set; }
 
         public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantTableViewModel> RestaurantTableViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<WaiterQR.Database.Product> Products { get; set; }
     }
 }

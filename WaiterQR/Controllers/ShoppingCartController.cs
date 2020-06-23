@@ -9,7 +9,7 @@ namespace WaiterQR.Controllers
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart
-        public ActionResult Index()
+        public ActionResult ShowBasket()
         {
             return View();
         }

@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\QrCodeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
@@ -350,10 +351,10 @@
     <Content Include="Views\QrCode\CreateQrCode.cshtml" />
     <Content Include="Views\RestaurantTable\ShowRestaurantTable.cshtml" />
     <Content Include="Views\RestaurantTable\EditRestaurantTable.cshtml" />
+    <Content Include="Views\Menu\ShowMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Menu\" />
     <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>

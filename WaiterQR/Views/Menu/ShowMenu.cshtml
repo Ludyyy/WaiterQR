@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WaiterQR.Database.Product>
+
+@{
+    ViewBag.Title = "ShowMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowMenu</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RestaurantID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName) &
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.RestaurantID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductImage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+        <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductPrice)
+    </td>
+
+    <td>
+        @Html.ActionLink("Add To Basket", "Edit", new { id = item.ProductID })
+    </td>
+</tr>
+}
+
+</table>

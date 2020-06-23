@@ -13,7 +13,7 @@ namespace WaiterQR.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult ShowProduct(int restaurantid, int restauranttable)
+        public ActionResult ShowProduct()
         {
             try
             {
@@ -22,10 +22,8 @@ namespace WaiterQR.Controllers
                 {
                     foreach (Product p in db.Product)
                     {
-                        if (p.RestaurantID == restaurantid)
-                        {
                             tempList.Add(p);
-                        }
+                        
                     }
                 }
                 return View(tempList);

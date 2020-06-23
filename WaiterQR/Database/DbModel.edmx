@@ -99,21 +99,16 @@
           <Property Name="RestaurantID" Type="int" Nullable="false" />
           <Property Name="RestaurantSeat" Type="int" Nullable="false" />
         </EntityType>
-        <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'websitedb.dbo.ShoppingCart' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
         <EntityType Name="ShoppingCart">
           <Key>
-            <PropertyRef Name="ID" />
             <PropertyRef Name="ShoppingCartID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="ProductCount" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ShoppingCartID" Type="int" Nullable="false" />
+          <Property Name="ShoppingCartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductIDs" Type="varchar(max)" Nullable="false" />
           <Property Name="ProductCount" Type="int" Nullable="false" />
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="RestaurantIDTable" Type="int" Nullable="false" />
         </EntityType>
         <!--Während der Generierung sind Fehler aufgetreten:
 Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
@@ -207,15 +202,7 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RestaurantTable" EntityType="Self.RestaurantTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ShoppingCart].[ID] AS [ID], 
-    [ShoppingCart].[ShoppingCartID] AS [ShoppingCartID], 
-    [ShoppingCart].[UserID] AS [UserID], 
-    [ShoppingCart].[ProductID] AS [ProductID], 
-    [ShoppingCart].[ProductCount] AS [ProductCount]
-    FROM [dbo].[ShoppingCart] AS [ShoppingCart]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
     [database_firewall_rules].[id] AS [id], 
@@ -373,17 +360,14 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
         </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
-            <PropertyRef Name="ID" />
             <PropertyRef Name="ShoppingCartID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="ProductCount" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShoppingCartID" Type="Int32" Nullable="false" />
+          <Property Name="ShoppingCartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductIDs" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ProductCount" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantIDTable" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -534,11 +518,12 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <EntitySetMapping Name="ShoppingCart">
             <EntityTypeMapping TypeName="websitedbModel.ShoppingCart">
               <MappingFragment StoreEntitySet="ShoppingCart">
+                <ScalarProperty Name="RestaurantIDTable" ColumnName="RestaurantIDTable" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
                 <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductIDs" ColumnName="ProductIDs" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ShoppingCartID" ColumnName="ShoppingCartID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
