@@ -1,5 +1,4 @@
-﻿@model IEnumerable<WaiterQR.Database.Product>
-
+﻿@model WaiterQR.Models.MenuViewModel
 @{
     ViewBag.Title = "ShowMenu";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,42 +10,45 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RestaurantID)
+            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().RestaurantID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductImage)
+            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductImage)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName) &
-            @Html.DisplayNameFor(model => model.ProductDescription)
+            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductName) &
+            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductPrice)
+            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductPrice)
         </th>
 
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.RestaurantID)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductImage)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductName)
-        <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductPrice)
-    </td>
+    @foreach (var item in Model.productList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+                <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
 
-    <td>
-        @Html.ActionLink("Add To Basket", "Edit", new { id = item.ProductID })
-    </td>
-</tr>
-}
+            <td>
+                @*<input type="button" value="Go Somewhere Else" onclick="location.href='<%:Url.Action("ShowMenu","MenuController")%>'"/>*@
+                @Html.ActionLink("Add To Basket", "UpdateShoppingCart", "ShoppingCart", new { })
+
+            </td>
+        </tr>
+    }
 
 </table>

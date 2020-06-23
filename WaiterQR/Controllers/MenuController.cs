@@ -1,31 +1,54 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office.CustomUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WaiterQR.Database;
+using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
     public class MenuController : Controller
     {
         // GET: Menu
-        public ActionResult ShowMenu(int restaurantid, int restauranttable)
+        public ActionResult ShowMenu(int tabletableid)
         {
             try
             {
+                RestaurantTable restaurantTable = new RestaurantTable();
                 var tempList = new List<Product>();
+
                 using (websitedbEntities db = new websitedbEntities())
                 {
-                    foreach (Product p in db.Product)
+                    List<Product> productList = db.Product.ToList();
+                    List<RestaurantTable> tableList = db.RestaurantTable.ToList();
+                    RestaurantTable restTable = new RestaurantTable();
+
+                    MenuViewModel mvw = new MenuViewModel();
+                    foreach (RestaurantTable rt in tableList)
                     {
-                        if (p.RestaurantID == restaurantid)
+                        if (rt.ID == tabletableid)
                         {
-                            tempList.Add(p);
+                            foreach(Product p in productList)
+                            {
+                                if (rt.RestaurantID == p.RestaurantID)
+                                {
+                                    tempList.Add(p);
+                                    restTable = rt;
+                                }
+                            }
                         }
                     }
+
+                    mvw.productList = tempList;
+                    mvw.restaurantTable = restTable;
+                    return View(mvw);
+
                 }
-                return View(tempList);
+
+
+
             }
 
 
@@ -39,20 +62,20 @@ namespace WaiterQR.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShowMenu(ShoppingCart shoppingCart)
+        public ActionResult ShowMenu()
         {
             try
             {
                 var tempList = new List<Product>();
                 using (websitedbEntities db = new websitedbEntities())
                 {
-                    foreach (Product p in db.Product)
-                    {
-                        if (p.RestaurantID == restaurantid)
-                        {
-                            tempList.Add(p);
-                        }
-                    }
+                    //foreach (Product p in db.Product)
+                    //{
+                    //    if (p.RestaurantID == restaurantid)
+                    //    {
+                    //        tempList.Add(p);
+                    //    }
+                    //}
                 }
                 return View(tempList);
             }
@@ -67,5 +90,6 @@ namespace WaiterQR.Controllers
             }
         }
 
+        
     }
 }
