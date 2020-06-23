@@ -45,7 +45,7 @@
         <td> @item.RestaurantID </td>
         <td> @item.RestaurantSeat </td>
 
-        <td>@Html.ActionLink("Show QR Code", "CreateQRCOde", "QrCode", new { restaurantid = item.RestaurantID, restauranttable = item.RestaurantSeat }, null)</td>
+        <td>@Html.ActionLink("Show QR Code", "CreateQRCOde", "QrCode", new { tableid = item.ID }, null)</td>
     </tr>
         }
 

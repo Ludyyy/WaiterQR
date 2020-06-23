@@ -45,7 +45,7 @@
 
             <td>
                 @*<input type="button" value="Go Somewhere Else" onclick="location.href='<%:Url.Action("ShowMenu","MenuController")%>'"/>*@
-                @Html.ActionLink("Add To Basket", "OrderNow", "ShoppingCart", new { id = item.ProductID}, null)
+                @Html.ActionLink("Add To Basket", "AddShoppingCart", "ShoppingCart", new { productid=item.ProductID, tableid = Model.restaurantTable.ID}, null)
 
             </td>
         </tr>

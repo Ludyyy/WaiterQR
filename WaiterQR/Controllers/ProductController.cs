@@ -61,6 +61,9 @@ namespace WaiterQR.Controllers
                     prod.ProductDescription = product.ProductDescription;
                     prod.ProductImage = product.ProductImage;
                     prod.ProductName = product.ProductName;
+
+
+
                     prod.ProductPrice = product.ProductPrice;
 
 

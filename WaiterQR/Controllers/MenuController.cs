@@ -12,7 +12,7 @@ namespace WaiterQR.Controllers
     public class MenuController : Controller
     {
         // GET: Menu
-        public ActionResult ShowMenu(int tabletableid)
+        public ActionResult ShowMenu(int tableid)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace WaiterQR.Controllers
                     MenuViewModel mvw = new MenuViewModel();
                     foreach (RestaurantTable rt in tableList)
                     {
-                        if (rt.ID == tabletableid)
+                        if (rt.ID == tableid)
                         {
                             foreach(Product p in productList)
                             {

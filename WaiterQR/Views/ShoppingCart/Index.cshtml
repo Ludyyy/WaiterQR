@@ -6,7 +6,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 
 <h2>ShowBasket</h2>
 
-<table border="1">
+<table class="table">
     <tr>
         <th>Name </th>
         <th>Price </th>
@@ -14,18 +14,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <th>Sub Total </th>
     </tr>
 
-    @foreach (var cart in (List<Cart>)Session["Cart"])
+    @foreach (var cart in (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"])
     {
         <tr>
-            <td>@cart.Product.ProductName</td>
-            <td>@cart.Product.ProductPrice</td>
-            <td>@cart.Quantity</td>
-            <td>@(String.Format("{0:N0}", Int32.Parse(cart.Product.ProductPrice) * cart.Quantity))</td>
+            <td>@cart.product.ProductName</td>
+            <td>@cart.product.ProductPrice</td>
+            <td>@cart.quantity</td>
+            <td>@(decimal.Parse(cart.product.ProductPrice)*cart.quantity)</td>
             <td>
-                @Html.ActionLink("Delete","Delete","ShoppingCart", new { id = cart.Product.ProductID }, new { onclick = "return cornfirm('Are you sure you want to delete this?');"})
+                @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.product.ProductID }, new { onclick = "return cornfirm('Are you sure you want to delete this?');" })
             </td>
         </tr>
     }
 </table>
 <br />
-@Html.ActionLink("Continue Shopping?", "Index", "Product")
+@Html.ActionLink("Continue Shopping?", "ShowMenu", "Menu", new { tableid = Session["tableid"]},null)

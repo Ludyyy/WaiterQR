@@ -18,33 +18,37 @@ namespace WaiterQR.Controllers
             return View();
         }
 
-        public ActionResult OrderNow(int? id)
+        public ActionResult AddShoppingCart(int? productid, int? tableid)
         {
             websitedbEntities db = new websitedbEntities();
-            if (id == null)
+            if (productid == null || tableid == null)
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            if (Session["Cart"] == null)
+            if (Session["ShoppingCartViewModel"] == null)
             {
-                List<Cart> lsCart = new List<Cart>
+                List<ShoppingCartViewModel> lsCart = new List<ShoppingCartViewModel>
                 {
-                    new Cart(db.Product.Find(id),1)
+                    new ShoppingCartViewModel(db.Product.Find(productid),1,db.RestaurantTable.Find(tableid).ID)
                 };
 
-                Session["Cart"] = lsCart;
+                Session["ShoppingCartViewModel"] = lsCart;
+                Session["tableid"] = tableid;
+
             }
             else
             {
-                List<Cart> lscart = (List<Cart>)Session["Cart"];
-                int check = isExistingCheck(id);
+                List<ShoppingCartViewModel> lscart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
+                int check = isExistingCheck(productid);
                 if (check == -1)
-                    lscart.Add(new Cart(db.Product.Find(id), 1));
+                    lscart.Add(new ShoppingCartViewModel(db.Product.Find(productid), 1, db.RestaurantTable.Find(tableid).ID));
                 else
-                    lscart[check].Quantity++;
+                    lscart[check].quantity++;
 
                 //lscart.Add(new Cart(db.Product.Find(id), 1));
-                Session["Cart"] = lscart;
+                Session["ShoppingCartViewModel"] = lscart;
+                Session["tableid"] = tableid;
+
             }
 
             return View("Index");
@@ -52,10 +56,10 @@ namespace WaiterQR.Controllers
         }
         private int isExistingCheck(int? id)
         {
-            List<Cart> lscart = (List<Cart>)Session["Cart"];
+            List<ShoppingCartViewModel> lscart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
             for(int i = 0;i< lscart.Count; i++)
             {
-                if (lscart[i].Product.ProductID == id) return i;
+                if (lscart[i].product.ProductID == id) return i;
             }
             return -1;
         }
@@ -67,7 +71,7 @@ namespace WaiterQR.Controllers
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
             int check = isExistingCheck(id);
-            List<Cart> lsCart = (List<Cart>)Session["Cart"];
+            List<ShoppingCartViewModel> lsCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
             lsCart.RemoveAt(check);
             return View("Index");
         }

@@ -17,9 +17,9 @@ namespace WaiterQR.Controllers
         //    return View();
         //}
         
-        public ActionResult CreateQrCode(int restaurantid, int restauranttable)
+        public ActionResult CreateQrCode(int tableid)
         {
-            string qrText = "https://" + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/menu/showmenu?restaurantid=" + restaurantid + "&restauranttable=" + restauranttable;
+            string qrText = "https://" + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/menu/showmenu?tableid=" +tableid;
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText,QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
