@@ -30,16 +30,16 @@ namespace WaiterQR.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<WaiterQR.Models.ApplicationUser> ApplicationUsers { get; set; }
+        //public System.Data.Entity.DbSet<WaiterQR.Models.ApplicationUser> ApplicationUsers { get; set; }
 
-        public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantViewModel> RestaurantModels { get; set; }
+        //public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantViewModel> RestaurantModels { get; set; }
 
-        public System.Data.Entity.DbSet<WaiterQR.Database.Restaurant> Restaurants { get; set; }
+        //public System.Data.Entity.DbSet<WaiterQR.Database.Restaurant> Restaurants { get; set; }
 
-        public System.Data.Entity.DbSet<WaiterQR.Database.RestaurantTable> RestaurantTables { get; set; }
+        //public System.Data.Entity.DbSet<WaiterQR.Database.RestaurantTable> RestaurantTables { get; set; }
 
-        public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantTableViewModel> RestaurantTableViewModels { get; set; }
+        //public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantTableViewModel> RestaurantTableViewModels { get; set; }
 
-        public System.Data.Entity.DbSet<WaiterQR.Database.Product> Products { get; set; }
+        //public System.Data.Entity.DbSet<WaiterQR.Database.Product> Products { get; set; }
     }
 }
