@@ -106,9 +106,6 @@ namespace WaiterQR.Controllers
                 }
 
             }
-
-
-
             return View("ShowShoppingCart");
         }
 
