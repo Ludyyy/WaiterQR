@@ -6,7 +6,6 @@
 
 <h2>ShowActiveOrder</h2>
 
-
 <html>
 <head>
     <style>
@@ -27,23 +26,19 @@
 <body>
     <table>
         <tr>
-            <th>TableNo</th>
+            <th>Table</th>
             <th>Product</th>
-            <th>Amount</th>
-
+            <th>Amount</th
 
         </tr>
         @foreach (var item in Model)
         {
             <tr>
-                <td> @item.tableid</td>
-                <td> @item.productname </td>
-                <td> @item.amount </td>
-
+                <td> @item.Tableid </td>
+                <td> @item.Productname </td>
+                <td> @item.Amount </td>
+       
             </tr>
         }
 
     </table>
-
-</body>
-</html>

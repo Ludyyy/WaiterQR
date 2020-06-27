@@ -7,11 +7,11 @@ namespace WaiterQR.Models
 {
     public class ActiveOrderViewModel
     {
-        public int tableid { get; set; }
+        public int Tableid { get; set; }
 
-        public string productname { get; set; }
+        public string Productname { get; set; }
 
-        public int amount { get; set; }
+        public int Amount { get; set; }
 
     }
 }

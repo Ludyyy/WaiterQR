@@ -30,6 +30,8 @@ namespace WaiterQR.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<WaiterQR.Database.ShoppingCart> ShoppingCarts { get; set; }
+
         //public System.Data.Entity.DbSet<WaiterQR.Models.ApplicationUser> ApplicationUsers { get; set; }
 
         //public System.Data.Entity.DbSet<WaiterQR.Models.RestaurantViewModel> RestaurantModels { get; set; }

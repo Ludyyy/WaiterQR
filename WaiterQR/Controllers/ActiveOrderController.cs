@@ -11,7 +11,7 @@ namespace WaiterQR.Controllers
     public class ActiveOrderController : Controller
     {
         // GET: ActiveOrder
-        public ActionResult ShowActiveOrderController(int restaurantid)
+        public ActionResult ShowActiveOrder(int restaurantid)
         {
             List<ActiveOrderViewModel> tempList = new List<ActiveOrderViewModel> ();
             try
@@ -24,7 +24,7 @@ namespace WaiterQR.Controllers
                     
                     foreach (ShoppingCart sc in shoppingCarts)
                     {
-                        if (sc.OrderStatus.Equals(0))
+                        if (sc.OrderStatus==1)
                         {
                             if (sc.RestaurantID == restaurantid)
                             {
@@ -33,9 +33,9 @@ namespace WaiterQR.Controllers
                                     if (p.ProductID == sc.ProductIDs)
                                     {
                                         ActiveOrderViewModel aovw = new ActiveOrderViewModel();
-                                        aovw.tableid = sc.RestaurantIDTable;
-                                        aovw.productname = p.ProductName;
-                                        aovw.amount = sc.ProductCount;
+                                        aovw.Tableid = db.RestaurantTable.Find(sc.RestaurantIDTable).RestaurantSeat;
+                                        aovw.Productname = p.ProductName;
+                                        aovw.Amount = sc.ProductCount;
                                         tempList.Add(aovw);
                                     }
                                 }
