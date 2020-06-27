@@ -51,6 +51,14 @@ namespace WaiterQR.Controllers
 
             }
 
+            decimal totalsum = 0;
+            foreach (var cart in (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"])
+            {
+                totalsum = totalsum + decimal.Parse(cart.product.ProductPrice) * cart.quantity;
+            }
+
+                ViewBag.message = "Your total sum is : " + totalsum;
+
             return View("ShowShoppingCart");
 
         }
@@ -73,6 +81,8 @@ namespace WaiterQR.Controllers
             int check = isExistingCheck(id);
             List<ShoppingCartViewModel> lsCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
             lsCart.RemoveAt(check);
+
+            ViewBag.message = "This is a shopping cart.";
             return View("ShowShoppingCart");
         }
     }
