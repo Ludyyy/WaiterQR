@@ -57,7 +57,7 @@ namespace WaiterQR.Controllers
         private int isExistingCheck(int? id)
         {
             List<ShoppingCartViewModel> lscart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
-            for(int i = 0;i< lscart.Count; i++)
+            for (int i = 0; i < lscart.Count; i++)
             {
                 if (lscart[i].product.ProductID == id) return i;
             }
@@ -75,6 +75,40 @@ namespace WaiterQR.Controllers
             lsCart.RemoveAt(check);
 
             ViewBag.message = "This is a shopping cart.";
+            return View("ShowShoppingCart");
+        }
+
+
+        public ActionResult OrderFinished()
+        {
+            //List<ShoppingCartViewModel> lsCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
+            //int count = lsCart.
+            List<ShoppingCartViewModel> lscart = new List<ShoppingCartViewModel> ();
+            lscart = (List<ShoppingCartViewModel>) Session["ShoppingCartViewModel"];
+            
+            using (websitedbEntities db = new websitedbEntities())
+            {
+
+                ShoppingCart shoppingCart = new ShoppingCart();
+
+                foreach (ShoppingCartViewModel cart in lscart)
+                {
+                    shoppingCart.ProductIDs = cart.product.ProductID;
+                    shoppingCart.UserID = 1;
+                    shoppingCart.OrderStatus = 1;
+                    shoppingCart.ProductCount = cart.quantity;
+                    shoppingCart.RestaurantID = cart.product.RestaurantID;
+                    shoppingCart.RestaurantIDTable = cart.tableid;
+
+                    db.ShoppingCart.Add(shoppingCart);
+                    db.SaveChanges();
+                
+                }
+
+            }
+
+
+
             return View("ShowShoppingCart");
         }
 

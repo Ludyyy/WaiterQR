@@ -105,10 +105,11 @@
           </Key>
           <Property Name="ShoppingCartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="ProductIDs" Type="varchar(max)" Nullable="false" />
+          <Property Name="ProductIDs" Type="int" Nullable="false" />
           <Property Name="ProductCount" Type="int" Nullable="false" />
           <Property Name="RestaurantID" Type="int" Nullable="false" />
           <Property Name="RestaurantIDTable" Type="int" Nullable="false" />
+          <Property Name="OrderStatus" Type="int" Nullable="false" />
         </EntityType>
         <!--Während der Generierung sind Fehler aufgetreten:
 Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
@@ -364,10 +365,11 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           </Key>
           <Property Name="ShoppingCartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ProductIDs" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductIDs" Type="Int32" Nullable="false" />
           <Property Name="ProductCount" Type="Int32" Nullable="false" />
           <Property Name="RestaurantID" Type="Int32" Nullable="false" />
           <Property Name="RestaurantIDTable" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatus" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -518,6 +520,7 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <EntitySetMapping Name="ShoppingCart">
             <EntityTypeMapping TypeName="websitedbModel.ShoppingCart">
               <MappingFragment StoreEntitySet="ShoppingCart">
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="RestaurantIDTable" ColumnName="RestaurantIDTable" />
                 <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
                 <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />

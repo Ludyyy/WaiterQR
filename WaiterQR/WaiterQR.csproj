@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActiveOrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -247,6 +248,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiveOrderViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -355,6 +357,7 @@
     <Content Include="Views\RestaurantTable\EditRestaurantTable.cshtml" />
     <Content Include="Views\Menu\ShowMenu.cshtml" />
     <Content Include="Views\ShoppingCart\ShowShoppingCart.cshtml" />
+    <Content Include="Views\ActiveOrder\ShowActiveOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
