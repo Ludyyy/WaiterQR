@@ -1267,6 +1267,9 @@ pre code {
     flex: 0 0 100%;
     max-width: 100%;
   }
+  #errmsg {
+      color:red;
+  }
 
   .row-cols-lg-2 > * {
     flex: 0 0 50%;

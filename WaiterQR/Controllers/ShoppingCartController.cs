@@ -51,14 +51,6 @@ namespace WaiterQR.Controllers
 
             }
 
-            decimal totalsum = 0;
-            foreach (var cart in (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"])
-            {
-                totalsum = totalsum + decimal.Parse(cart.product.ProductPrice) * cart.quantity;
-            }
-
-                ViewBag.message = "Your total sum is : " + totalsum;
-
             return View("ShowShoppingCart");
 
         }
@@ -83,6 +75,18 @@ namespace WaiterQR.Controllers
             lsCart.RemoveAt(check);
 
             ViewBag.message = "This is a shopping cart.";
+            return View("ShowShoppingCart");
+        }
+
+        public ActionResult UpdateCart(FormCollection frc)
+        {
+            string[] quantities = frc.GetValues("quantity");
+            List<ShoppingCartViewModel> lstCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
+            for (int i =0; i< lstCart.Count; i++)
+            {
+                lstCart[i].quantity = Convert.ToInt32(quantities[i]);
+            }
+            Session["ShoppingCartViewModel"] = lstCart;
             return View("ShowShoppingCart");
         }
     }
