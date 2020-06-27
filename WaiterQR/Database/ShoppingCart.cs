@@ -16,9 +16,10 @@ namespace WaiterQR.Database
     {
         public int ShoppingCartID { get; set; }
         public int UserID { get; set; }
-        public string ProductIDs { get; set; }
+        public int ProductIDs { get; set; }
         public int ProductCount { get; set; }
         public int RestaurantID { get; set; }
         public int RestaurantIDTable { get; set; }
+        public int OrderStatus { get; set; }
     }
 }

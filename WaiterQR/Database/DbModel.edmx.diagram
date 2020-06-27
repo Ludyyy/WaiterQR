@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="websitedbModel.Restaurant" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="websitedbModel.RestaurantTable" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="websitedbModel.ShoppingCart" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="websitedbModel.database_firewall_rules" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="websitedbModel.database_firewall_rules" Width="1.5" PointX="8.75" PointY="4.75" />
         <AssociationConnector Association="websitedbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="websitedbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="websitedbModel.AspNetUserRoles" />
