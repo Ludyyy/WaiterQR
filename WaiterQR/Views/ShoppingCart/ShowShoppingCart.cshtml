@@ -13,64 +13,71 @@
         using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
         {
 
-    <table class="table">
-        <tr>
-            <th>Name </th>
-            <th>Price </th>
-            <th>Quantity </th>
-            <th>Sub Total </th>
-        </tr>
+            <table class="table">
+                <tr>
+                    <th>Name </th>
+                    <th>Price </th>
+                    <th>Quantity </th>
+                    <th>Sub Total </th>
+                </tr>
 
-        @foreach (var cart in (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"])
-        {
-    <tr>
-        <td>@cart.product.ProductName</td>
-        <td>@cart.product.ProductPrice</td>
-        <td>
-            <input type="text" name="quantity" id="quantity" value="@cart.quantity" />
-            &nbsp;<span id="errmsg"></span>
-        </td>
-        <td>@(decimal.Parse(cart.product.ProductPrice) * cart.quantity)</td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.product.ProductID }, new { onclick = "return cornfirm('Are you sure you want to delete this?');" })
+                @foreach (var cart in (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"])
+                {
+                    <tr>
+                        <td>@cart.product.ProductName</td>
+                        <td>@cart.product.ProductPrice</td>
+                        <td>
+                            <input type="text" name="quantity" id="quantity" value="@cart.quantity" />
+                            &nbsp;<span id="errmsg"></span>
+                        </td>
+                        <td>@(decimal.Parse(cart.product.ProductPrice) * cart.quantity)</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.product.ProductID }, new { onclick = "return cornfirm('Are you sure you want to delete this?');" })
 
-        </td>
-    </tr>
-        }
-        <tr>
-            <td colspan="3">Total:</td>
-            <td>
-                @{
-                    List<ShoppingCartViewModel> temp = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
-                    decimal total = temp.Sum(x => (x.quantity) * decimal.Parse(x.product.ProductPrice));
+                        </td>
+                    </tr>
                 }
-                @total €
-            </td>
-        </tr>
+                <tr>
+                    <td colspan="3">Total:</td>
+                    <td>
+                        @{
+                            List<ShoppingCartViewModel> temp = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
+                            decimal total = temp.Sum(x => (x.quantity) * decimal.Parse(x.product.ProductPrice));
+                        }
+                        @total €
+                    </td>
+                </tr>
 
-       
-    </table>
-<br />
 
-<div>
-    <button class="btn btn-secondary">
-        @Html.ActionLink("Order Now", "OrderFinished", "ShoppingCart")
-    </button>
-</div>
+            </table>
+            <br />
 
-@Html.ActionLink("Continue Shopping?", "ShowMenu", "Menu", new { tableid = Session["tableid"] }, null)
-        <br/>
-        <input type="submit" value="Update Cart"/>
+            <div>
+                <button class="btn btn-dark">
+                    @Html.ActionLink("Order Now", "OrderFinished", "ShoppingCart")
+                </button>
+            </div>
+            <br />
+
+            <div>
+                <button class="btn btn-secondary">
+                    @Html.ActionLink("Back to the Menu", "ShowMenu", "Menu", new { tableid = Session["tableid"] }, null)
+                </button>
+
+                <input class="btn btn-secondary" type="submit" value="Update Shoppingcart" />
+
+            </div>
+            <br />
         }
     }
     else
     {
-       <h4> No items in your cart!!</h4>
-    } 
+        <h4> No items in your cart!!</h4>
+    }
 }
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#quantity").keypress(function (e){
+    $(document).ready(function () {
+        $("#quantity").keypress(function (e) {
             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
                 $("#errmsg").html("Enter digits only!").show().fadeOut("slow");
                 return false;
