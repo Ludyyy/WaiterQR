@@ -13,5 +13,8 @@ namespace WaiterQR.Models
 
         public int Amount { get; set; }
 
+        public int Status { get; set; }
+
+        public int OrderID { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,6 +37,8 @@ namespace WaiterQR.Controllers
                                         aovw.Tableid = db.RestaurantTable.Find(sc.RestaurantIDTable).RestaurantSeat;
                                         aovw.Productname = p.ProductName;
                                         aovw.Amount = sc.ProductCount;
+                                        aovw.Status = sc.OrderStatus;
+                                        aovw.OrderID = sc.ShoppingCartID;
                                         tempList.Add(aovw);
                                     }
                                 }
@@ -55,6 +58,30 @@ namespace WaiterQR.Controllers
                 return View();
 
             }
+        }
+
+        public ActionResult FinishOrder(int orderid)
+        {
+            ShoppingCart sc = new ShoppingCart();
+            try
+            {
+
+                using (websitedbEntities db = new websitedbEntities())
+                {
+                    sc = db.ShoppingCart.Find(orderid);
+                    sc.OrderStatus = 0;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ShowActiveOrder", new { restaurantid = sc.RestaurantID });
+            }
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+                return RedirectToAction("ShowActiveOrder", new { restaurantid = sc.RestaurantID });
+            }
+
+
         }
     }
 }

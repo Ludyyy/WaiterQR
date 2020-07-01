@@ -28,17 +28,31 @@
         <tr>
             <th>Table</th>
             <th>Product</th>
-            <th>Amount</th
+            <th>Amount</th>
 
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td> @item.Tableid </td>
-                <td> @item.Productname </td>
-                <td> @item.Amount </td>
-       
-            </tr>
+    <tr>
+        <td> @item.Tableid </td>
+        <td> @item.Productname </td>
+        <td> @item.Amount </td>
+        @if (item.Status == 1)
+        {
+            <td>Active</td>
+        }
+        else
+        {
+            <td>Finished Order</td>
+        }
+        <td>
+            <button>@Html.ActionLink("Mark as delivered", "FinishOrder", "ActiveOrder", new { orderid = item.OrderID }, null)</button>
+
+        </td>
+    </tr>
         }
 
+
     </table>
+</body>
+</html>

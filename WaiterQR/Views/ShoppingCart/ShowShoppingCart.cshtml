@@ -42,7 +42,7 @@
             <td>
                 @{
                     List<ShoppingCartViewModel> temp = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
-                    var total = String.Format("{0:N0}", temp.Sum(x => Convert.ToDecimal(x.quantity) * decimal.Parse(x.product.ProductPrice)));
+                    decimal total = temp.Sum(x => (x.quantity) * decimal.Parse(x.product.ProductPrice));
                 }
                 @total €
             </td>
