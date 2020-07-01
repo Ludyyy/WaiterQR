@@ -97,10 +97,10 @@ namespace WaiterQR.Controllers
                             db.RestaurantTable.Add(rt);
                             db.SaveChanges();
                         }
-                        ViewBag.message = "Succesfully increased to" + restaurantTableViewModel.capacity + "tables";
+                        ViewBag.message = "Successfully increased to " + restaurantTableViewModel.capacity + " Tables";
 
                     }
-                    if (tableamount > restaurantTableViewModel.capacity)
+                    else if (tableamount > restaurantTableViewModel.capacity)
                     {
                         List<RestaurantTable> tableList = db.RestaurantTable.ToList();
 
@@ -124,12 +124,12 @@ namespace WaiterQR.Controllers
                             db.RestaurantTable.Add(rt);
                             db.SaveChanges();
                         }
-                        ViewBag.message = "Succesfully decreased to"+ restaurantTableViewModel.capacity + "tables";
+                        ViewBag.message = "Successfully decreased to "+ restaurantTableViewModel.capacity + " Tables";
 
                     }
-                    if (tableamount == restaurantTableViewModel.capacity)
+                   else if (tableamount == restaurantTableViewModel.capacity)
                     {
-                        ViewBag.message = "Please give a different table capacity number than the current one";
+                        ViewBag.message = "Please enter a different Table Capacity Number than the current one";
                     }
                 }
             }
