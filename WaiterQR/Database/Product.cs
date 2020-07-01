@@ -21,6 +21,7 @@ namespace WaiterQR.Database
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string ProductPrice { get; set; }
+        
         [DisplayName("UploadFile")]
         public string ImagePath { get; set; }
 

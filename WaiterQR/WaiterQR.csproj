@@ -192,7 +192,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActiveOrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -359,12 +358,9 @@
     <Content Include="Views\Menu\ShowMenu.cshtml" />
     <Content Include="Views\ShoppingCart\ShowShoppingCart.cshtml" />
     <Content Include="Views\ActiveOrder\ShowActiveOrder.cshtml" />
-    <Content Include="Views\Image\Add.cshtml" />
-    <Content Include="Views\Image\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

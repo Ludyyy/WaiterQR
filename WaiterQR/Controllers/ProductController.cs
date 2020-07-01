@@ -9,6 +9,7 @@ using WaiterQR.Database;
 using WaiterQR.Models;
 using System.IO;
 
+
 namespace WaiterQR.Controllers
 {
     public class ProductController : Controller
@@ -55,12 +56,20 @@ namespace WaiterQR.Controllers
             try
 
             {
-                string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
-                string extension = Path.GetExtension(product.ImageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                product.ImagePath = "~/Image/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
-                product.ImageFile.SaveAs(fileName);
+                //string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
+                //string extension = Path.GetExtension(product.ImageFile.FileName);
+                //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                //product.ImagePath = "~/Image/" + fileName;
+                //fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                //product.ImageFile.SaveAs(fileName);
+
+
+                byte[] imgData;
+                using (BinaryReader reader = new BinaryReader(product.ImageFile.InputStream))
+                {
+                    imgData = reader.ReadBytes((int)product.ImageFile.InputStream.Length);
+                }
+
                 using (websitedbEntities db = new websitedbEntities())
                 {
 
@@ -69,7 +78,7 @@ namespace WaiterQR.Controllers
                     prod.ProductDescription = product.ProductDescription;
                     prod.ProductName = product.ProductName;
                     prod.ProductPrice = product.ProductPrice;
-                    prod.ImagePath = product.ImagePath;
+                    prod.ImagePath = Convert.ToBase64String(imgData);
 
                   
 
