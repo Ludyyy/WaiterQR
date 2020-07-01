@@ -11,7 +11,9 @@ namespace WaiterQR.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.Web;
+
     public partial class Product
     {
         public int ProductID { get; set; }
@@ -19,6 +21,9 @@ namespace WaiterQR.Database
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string ProductPrice { get; set; }
-        public string ProductImage { get; set; }
+        [DisplayName("UploadFile")]
+        public string ImagePath { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

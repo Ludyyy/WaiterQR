@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Mvc;
 using WaiterQR.Database;
 using WaiterQR.Models;
+using System.IO;
 
 namespace WaiterQR.Controllers
 {
@@ -52,24 +53,29 @@ namespace WaiterQR.Controllers
         public ActionResult AddProduct(Product product)
         {
             try
+
             {
+                string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
+                string extension = Path.GetExtension(product.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                product.ImagePath = "~/Image/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                product.ImageFile.SaveAs(fileName);
                 using (websitedbEntities db = new websitedbEntities())
                 {
 
                     Product prod = new Product();
                     prod.RestaurantID = product.RestaurantID;
                     prod.ProductDescription = product.ProductDescription;
-                    prod.ProductImage = product.ProductImage;
                     prod.ProductName = product.ProductName;
-
-
-
                     prod.ProductPrice = product.ProductPrice;
+                    prod.ImagePath = product.ImagePath;
 
-
+                  
 
                     db.Product.Add(prod);
                     db.SaveChanges();
+                   
                 }
 
 
@@ -81,7 +87,7 @@ namespace WaiterQR.Controllers
 
 
             }
-            return View();
+            return RedirectToAction("ShowProduct", "Product");
         }
 
     
@@ -124,7 +130,7 @@ namespace WaiterQR.Controllers
 
             prod.RestaurantID = product.RestaurantID;
             prod.ProductDescription = product.ProductDescription;
-            prod.ProductImage = product.ProductImage;
+            prod.ImagePath = product.ImagePath;
             prod.ProductName = product.ProductName;
             prod.ProductPrice = product.ProductPrice;
 

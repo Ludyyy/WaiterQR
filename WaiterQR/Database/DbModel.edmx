@@ -75,7 +75,7 @@
           <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
           <Property Name="ProductDescription" Type="varchar(max)" Nullable="false" />
           <Property Name="ProductPrice" Type="varchar(max)" Nullable="false" />
-          <Property Name="ProductImage" Type="varchar(max)" />
+          <Property Name="ImagePath" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
@@ -335,7 +335,7 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ProductPrice" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Restaurant">
           <Key>
@@ -484,7 +484,7 @@ Warnung 6002: Für Tabelle/Sicht 'websitedb.sys.database_firewall_rules' ist kei
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="websitedbModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
                 <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />

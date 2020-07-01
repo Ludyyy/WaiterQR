@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using WaiterQR.Database;
 
 namespace WaiterQR.Models
 {
@@ -27,8 +28,7 @@ namespace WaiterQR.Models
         [Required(ErrorMessage = "ProductPrice is required.")]
         public string ProductPrice { get; set; }
 
-        [Required(ErrorMessage = "ProductImage is required.")]
-        public string ProductImage { get; set; }
+     
 
     }
 
