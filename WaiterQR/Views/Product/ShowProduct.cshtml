@@ -33,18 +33,22 @@
             <th>Description</th>
             <th>Price</th>
             <th>Restaurant</th>
+            <th>Image<th>
+
+            
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td> @item.ProductName </td>
-                <td> @item.ProductDescription </td>
-                <td> @item.ProductPrice</td>
-                <td> @item.RestaurantID</td>
-                <td>@Html.ActionLink("Edit Product", "EditProduct", "Product", new { item.ProductID }, null)</td>
-                <td>@Html.ActionLink("Add Product", "AddProduct", "Product", new { item.ProductID }, null)</td>
-                <td></td>
-            </tr>
+    <tr>
+        <td> @item.ProductName </td>
+        <td> @item.ProductDescription </td>
+        <td> @item.ProductPrice</td>
+        <td> @item.RestaurantID</td>
+        <td><img src="@Url.Content(item.ImagePath)" width="50" height="50" /></td>
+
+        <td>@Html.ActionLink("Edit Product", "EditProduct", "Product", new { item.ProductID }, null)</td>
+        <td>@Html.ActionLink("Add Product", "AddProduct", "Product", new { item.ProductID }, null)</td>
+    </tr>
         }
 
     </table>
