@@ -33,26 +33,32 @@
         </tr>
         @foreach (var item in Model)
         {
-    <tr>
-        <td> @item.Tableid </td>
-        <td> @item.Productname </td>
-        <td> @item.Amount </td>
-        @if (item.Status == 1)
-        {
-            <td>Active</td>
-        }
-        else
-        {
-            <td>Finished Order</td>
-        }
-        <td>
-            <button>@Html.ActionLink("Mark as delivered", "FinishOrder", "ActiveOrder", new { orderid = item.OrderID }, null)</button>
+            <tr>
+                <td> @item.Tableid </td>
+                <td> @item.Productname </td>
+                <td> @item.Amount </td>
+                @if (item.Status == 1)
+                {
+                    <td>Active</td>
+                }
+                else
+                {
+                    <td>Finished Order</td>
+                }
+                <td>
+                    <button class="btn btn-dark">@Html.ActionLink("Mark as delivered", "FinishOrder", "ActiveOrder", new { orderid = item.OrderID }, null)</button>
+                </td>
 
-        </td>
-    </tr>
+            </tr>
         }
 
 
     </table>
+    <div>
+        <button class="btn btn-secondary">
+            @Html.ActionLink("Back to the RestaurantList", "ShowRestaurant", "Restaurant")
+        </button>
+
+    </div>
 </body>
 </html>

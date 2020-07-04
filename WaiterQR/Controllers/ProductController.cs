@@ -24,8 +24,8 @@ namespace WaiterQR.Controllers
                 {
                     foreach (Product p in db.Product)
                     {
-                            tempList.Add(p);
-                        
+                        tempList.Add(p);
+
                     }
                 }
                 return View(tempList);
@@ -41,7 +41,7 @@ namespace WaiterQR.Controllers
             }
         }
 
-      
+
 
         // GET: Product/Create
         public ActionResult AddProduct()
@@ -80,85 +80,112 @@ namespace WaiterQR.Controllers
                     prod.ProductPrice = product.ProductPrice;
                     prod.ImagePath = Convert.ToBase64String(imgData);
 
-                  
+
 
                     db.Product.Add(prod);
                     db.SaveChanges();
-                   
+
                 }
 
-
+                return RedirectToAction("ShowProduct");
             }
             catch (Exception e)
             {
                 string s = string.Format("Fehler: {0}", e.Message);
                 s = string.Format("Typ: {0}", e.GetType());
 
-
+                return RedirectToAction("ShowProduct");
             }
-            return RedirectToAction("ShowProduct", "Product");
         }
 
-    
-    public ActionResult EditProduct(int productID)
-    {
-        if (!productID.Equals(null))
+
+        public ActionResult EditProduct(int productID)
         {
-            try
+            if (!productID.Equals(null))
             {
-                websitedbEntities db = new websitedbEntities();
+                try
+                {
+                    websitedbEntities db = new websitedbEntities();
 
 
-                var prod = db.Product.SingleOrDefault(x => x.ProductID == productID);
+                    var prod = db.Product.SingleOrDefault(x => x.ProductID == productID);
 
-                return View(prod);
+                    return View(prod);
+
+                }
+
+                catch (Exception e)
+                {
+                    string s = string.Format("Fehler: {0}", e.Message);
+                    s = string.Format("Typ: {0}", e.GetType());
+                    return View();
+                }
 
             }
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult EditProduct(Product product)
+        {
+
+            try
+            {
+                byte[] imgData;
+                using (BinaryReader reader = new BinaryReader(product.ImageFile.InputStream))
+                {
+                    imgData = reader.ReadBytes((int)product.ImageFile.InputStream.Length);
+                }
+                using (websitedbEntities db = new websitedbEntities())
+                {
+
+                    Product prod = db.Product.SingleOrDefault(x => x.ProductID == product.ProductID);
+
+                    prod.RestaurantID = product.RestaurantID;
+                    prod.ProductDescription = product.ProductDescription;
+                    prod.ProductName = product.ProductName;
+                    prod.ProductPrice = product.ProductPrice;
+                    prod.ImagePath = Convert.ToBase64String(imgData);
+
+
+                    db.SaveChanges();
+
+                    ViewBag.message = "Restaurant information updated successfully.";
+                    return RedirectToAction("ShowProduct");
+
+                }
+            }
             catch (Exception e)
             {
                 string s = string.Format("Fehler: {0}", e.Message);
                 s = string.Format("Typ: {0}", e.GetType());
                 return View();
             }
-
         }
-        return View();
-    }
-
-    [HttpPost]
-    public ActionResult EditProduct(Product product)
-    {
-        try
+        public ActionResult DeleteProduct(int productID)
         {
-            websitedbEntities db = new websitedbEntities();
+            try
+            {
+                using (websitedbEntities db = new websitedbEntities())
+                {
+                    Product p = db.Product.Find(productID);
+                    db.Product.Remove(p);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ShowProduct");
 
+            }
+            catch (Exception e)
+            {
+                string s = string.Format("Fehler: {0}", e.Message);
+                s = string.Format("Typ: {0}", e.GetType());
+                return RedirectToAction("ShowProduct");
 
-
-            Product prod = db.Product.SingleOrDefault(x => x.ProductID == product.ProductID);
-
-            prod.RestaurantID = product.RestaurantID;
-            prod.ProductDescription = product.ProductDescription;
-            prod.ImagePath = product.ImagePath;
-            prod.ProductName = product.ProductName;
-            prod.ProductPrice = product.ProductPrice;
-
-
-            db.SaveChanges();
-
-            ViewBag.message = "Restaurant information updated successfully.";
-            return View(prod);
+            }
 
         }
-
-        catch (Exception e)
-        {
-            string s = string.Format("Fehler: {0}", e.Message);
-            s = string.Format("Typ: {0}", e.GetType());
-            return View();
-        }
-
-
-    }
     }
 }
+
+    
+

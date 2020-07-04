@@ -57,6 +57,11 @@
             @Html.ActionLink("Show Tables", "ShowRestaurantTable", "RestaurantTable", new { restaurantid = item.ID }, null)
         </button>
     </td>
+    <td>
+        <button class="btn btn-dark">
+            @Html.ActionLink("Show Orders", "ShowActiveOrder", "ActiveOrder", new { restaurantid = item.ID }, null)
+        </button>
+    </td>
 </tr>
     }
 

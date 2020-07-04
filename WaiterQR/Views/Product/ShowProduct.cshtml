@@ -32,30 +32,36 @@
     </button>
     <table>
         <tr>
+            <th>Image</th>
             <th>Product</th>
             <th>Description</th>
             <th>Price</th>
             <th>Restaurant</th>
-            <th>Image<th>
 
-            
+
+
         </tr>
         @foreach (var item in Model)
         {
 
     <tr>
+        @{var imgSrc = String.Format("data:image/gif;base64,{0}", item.ImagePath); }
+        <td><img src="@imgSrc" width="100" height="100" /></td>
         <td> @item.ProductName </td>
         <td> @item.ProductDescription </td>
         <td> @item.ProductPrice</td>
         <td> @item.RestaurantID</td>
         @*<td><img src="@Url.Content(item.ImagePath)" width="50" height="50" /></td>*@
 
-        @{var imgSrc = String.Format("data:image/gif;base64,{0}", item.ImagePath); }
 
-
-        <td><img src="@imgSrc" width="50" height="50"/></td>
-
-        <td>@Html.ActionLink("Edit Product", "EditProduct", "Product", new { item.ProductID }, null)</td>
+        <td>
+            <button class="btn btn-dark">
+                @Html.ActionLink("Edit Product", "EditProduct", "Product", new { item.ProductID }, null)
+            </button>
+            <button class="btn btn-dark">
+                @Html.ActionLink("Delete Product", "DeleteProduct", "Product", new { item.ProductID }, null)
+            </button>
+        </td>
     </tr>
         }
 

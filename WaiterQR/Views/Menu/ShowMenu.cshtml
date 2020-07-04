@@ -13,7 +13,7 @@
             @Html.DisplayNameFor(model => model.productList.FirstOrDefault().RestaurantID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductImage)
+            Image
         </th>
         <th>
             @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductName) &
@@ -32,9 +32,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RestaurantID)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
+            @{var imgSrc = String.Format("data:image/gif;base64,{0}", item.ImagePath); }
+            <td><img src="@imgSrc" width="100" height="100" /></td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
                 <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
@@ -44,11 +43,10 @@
             </td>
 
             <td>
-                @*<input type="button" value="Go Somewhere Else" onclick="location.href='<%:Url.Action("ShowMenu","MenuController")%>'"/>*@
-                @Html.ActionLink("Add To Basket", "AddShoppingCart", "ShoppingCart", new { productid=item.ProductID, tableid = Model.restaurantTable.ID}, null)
-
+                <button class="btn btn-dark">
+                    @Html.ActionLink("Add To Basket", "AddShoppingCart", "ShoppingCart", new { productid = item.ProductID, tableid = Model.restaurantTable.ID }, null)
+                </button>
             </td>
         </tr>
     }
-
 </table>
