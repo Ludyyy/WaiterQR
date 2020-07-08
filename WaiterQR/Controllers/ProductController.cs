@@ -12,32 +12,70 @@ using System.IO;
 
 namespace WaiterQR.Controllers
 {
+    [Authorize]
+
     public class ProductController : Controller
     {
+        
         // GET: Product
-        public ActionResult ShowProduct()
+        public ActionResult ShowProduct(int? restaurantid)
         {
-            try
+            if (restaurantid == null)
             {
-                var tempList = new List<Product>();
-                using (websitedbEntities db = new websitedbEntities())
+                try
                 {
-                    foreach (Product p in db.Product)
+                    var tempList = new List<Product>();
+                    using (websitedbEntities db = new websitedbEntities())
                     {
-                        tempList.Add(p);
+                        foreach (Product p in db.Product)
+                        {
+                            tempList.Add(p);
 
+                        }
                     }
+                    return View(tempList);
                 }
-                return View(tempList);
+
+
+                catch (Exception e)
+                {
+                    string s = string.Format("Fehler: {0}", e.Message);
+                    s = string.Format("Typ: {0}", e.GetType());
+                    return View();
+
+                }
             }
-
-
-            catch (Exception e)
+            else
             {
-                string s = string.Format("Fehler: {0}", e.Message);
-                s = string.Format("Typ: {0}", e.GetType());
-                return View();
+                try
+                {
+                    var tempList = new List<Product>();
+                    using (websitedbEntities db = new websitedbEntities())
+                    {
+                        foreach (Product p in db.Product)
+                        {
+                            if (p.RestaurantID == restaurantid)
+                            {
+                                tempList.Add(p);
+                            }
+                        }
+                    }
 
+                    using (websitedbEntities db = new websitedbEntities())
+                    {
+                        ViewBag.RestaurantName = db.Restaurant.Find(restaurantid).Name;
+                    }
+                    return View(tempList);
+                }
+
+
+                catch (Exception e)
+                {
+                    string s = string.Format("Fehler: {0}", e.Message);
+                    s = string.Format("Typ: {0}", e.GetType());
+                    return View();
+
+                }
             }
         }
 
@@ -56,13 +94,6 @@ namespace WaiterQR.Controllers
             try
 
             {
-                //string fileName = Path.GetFileNameWithoutExtension(product.ImageFile.FileName);
-                //string extension = Path.GetExtension(product.ImageFile.FileName);
-                //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                //product.ImagePath = "~/Image/" + fileName;
-                //fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
-                //product.ImageFile.SaveAs(fileName);
-
 
                 byte[] imgData;
                 using (BinaryReader reader = new BinaryReader(product.ImageFile.InputStream))
@@ -77,24 +108,31 @@ namespace WaiterQR.Controllers
                     prod.RestaurantID = product.RestaurantID;
                     prod.ProductDescription = product.ProductDescription;
                     prod.ProductName = product.ProductName;
-                    prod.ProductPrice = product.ProductPrice;
                     prod.ImagePath = Convert.ToBase64String(imgData);
 
+                    if ((decimal.Parse(product.ProductPrice) > 0 && !product.ProductPrice.Contains('.'))){
+                        prod.ProductPrice = product.ProductPrice;
+                        db.Product.Add(prod);
+                        db.SaveChanges();
+                        return RedirectToAction("ShowProduct", new { restaurantid = prod.RestaurantID });
 
+                    }
+                    else
+                    {
+                        ViewBag.PriceError = "Please enter a price in the format xxx,yy";
+                        return View();
+                    }
 
-                    db.Product.Add(prod);
-                    db.SaveChanges();
 
                 }
-
-                return RedirectToAction("ShowProduct");
+              
             }
             catch (Exception e)
             {
                 string s = string.Format("Fehler: {0}", e.Message);
                 s = string.Format("Typ: {0}", e.GetType());
 
-                return RedirectToAction("ShowProduct");
+                return View();
             }
         }
 
@@ -138,7 +176,6 @@ namespace WaiterQR.Controllers
                 }
                 using (websitedbEntities db = new websitedbEntities())
                 {
-
                     Product prod = db.Product.SingleOrDefault(x => x.ProductID == product.ProductID);
 
                     prod.RestaurantID = product.RestaurantID;
@@ -146,12 +183,21 @@ namespace WaiterQR.Controllers
                     prod.ProductName = product.ProductName;
                     prod.ProductPrice = product.ProductPrice;
                     prod.ImagePath = Convert.ToBase64String(imgData);
+                   
+                    if ((decimal.Parse(product.ProductPrice) > 0 && !product.ProductPrice.Contains('.')))
+                    {
+                        prod.ProductPrice = product.ProductPrice;
+                        db.SaveChanges();
 
+                        ViewBag.message = "Restaurant information updated successfully.";
+                        return RedirectToAction("ShowProduct", new { restaurantid = prod.RestaurantID });
 
-                    db.SaveChanges();
-
-                    ViewBag.message = "Restaurant information updated successfully.";
-                    return RedirectToAction("ShowProduct");
+                    }
+                    else
+                    {
+                        ViewBag.PriceError = "Please enter a price in the format xxx,yy";
+                        return View();
+                    }
 
                 }
             }

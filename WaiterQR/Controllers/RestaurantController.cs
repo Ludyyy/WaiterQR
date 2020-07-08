@@ -11,6 +11,8 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
+    [Authorize]
+
     public class RestaurantController : Controller
     {
         // GET: Restaurant
@@ -43,24 +45,6 @@ namespace WaiterQR.Controllers
                     db.Restaurant.Add(restaurant);
                     db.SaveChanges();
 
-                    ////TableCreator(restaurant.ID, restaurant.TableAmount);
-                    //RestaurantTable rs = new RestaurantTable();
-
-
-                    //int i = 1;
-                    //int k = restaurant.TableAmount;
-                    //int c = db.Restaurant.Count() + 1;
-                    //while (i <= k)
-                    //{
-                    //    rs.RestaurantID = c;
-                    //    rs.RestaurantSeat = i;
-
-
-                    //    db.RestaurantTable.Add(rs);
-                    //    db.SaveChanges();
-
-                    //    i++;
-                    //}
 
                 }
 
@@ -72,7 +56,7 @@ namespace WaiterQR.Controllers
                 s = string.Format("Typ: {0}", e.GetType());
 
             }
-            return View();
+            return RedirectToAction("ShowRestaurant");
 
         }
 
@@ -169,7 +153,17 @@ namespace WaiterQR.Controllers
         }
 
         
+        public ActionResult DeleteRestaurant(int restaurantid)
+        {
+            using(websitedbEntities db = new websitedbEntities())
+            {
+                db.Restaurant.Remove(db.Restaurant.Find(restaurantid));
+                db.SaveChanges();
 
+            }
+            return RedirectToAction("ShowRestaurant");
+
+        }
     }
 
 

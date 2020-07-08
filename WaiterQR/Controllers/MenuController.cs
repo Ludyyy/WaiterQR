@@ -9,6 +9,7 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
+
     public class MenuController : Controller
     {
         // GET: Menu

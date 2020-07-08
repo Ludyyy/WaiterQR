@@ -67,6 +67,13 @@
     @Html.ActionLink("Back to List", "ShowProduct", "Product")
 </div>
 
+@if (ViewBag.PriceError != null)
+{
+    <h4>@ViewBag.PriceError</h4>
+
+}
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

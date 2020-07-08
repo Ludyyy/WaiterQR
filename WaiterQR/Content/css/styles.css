@@ -4018,10 +4018,12 @@ input[type=button].btn-block {
   margin-bottom: 0;
   list-style: none;
 }
-.navbar-nav .nav-link {
-  padding-right: 0;
-  padding-left: 0;
-}
+    .navbar-nav .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
 .navbar-nav .dropdown-menu {
   position: static;
   float: none;
@@ -4031,6 +4033,9 @@ input[type=button].btn-block {
   display: inline-block;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  margin-left :auto ;
+  margin-right :auto;
+
 }
 
 .navbar-collapse {
@@ -10087,9 +10092,11 @@ h3 {
 #mainNav .navbar-nav {
   margin-top: 1rem;
 }
-#mainNav .navbar-nav li.nav-item a.nav-link {
-  color: #fff;
-}
+    #mainNav .navbar-nav li.nav-item a.nav-link {
+        color: #fff;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
   color: #1abc9c;
 }

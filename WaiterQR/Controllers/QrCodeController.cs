@@ -9,6 +9,8 @@ using QRCoder;
 
 namespace WaiterQR.Controllers
 {
+    [Authorize]
+
     public class QrCodeController : Controller
     {
         //// GET: QrCode

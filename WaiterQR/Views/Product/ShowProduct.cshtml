@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ShowProduct</h2>
+<h2>ShowProducts</h2>
+@if (ViewBag.RestaurantName != null)
+{
+    <h2> of Restaurant @ViewBag.RestaurantName</h2>
+}
 
 <!DOCTYPE html>
 
@@ -33,10 +37,11 @@
     <table>
         <tr>
             <th>Image</th>
+            <th>Restaurant</th>
             <th>Product</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Restaurant</th>
+
 
 
 
@@ -47,10 +52,20 @@
             <tr>
                 @{var imgSrc = String.Format("data:image/gif;base64,{0}", item.ImagePath); }
                 <td><img src="@imgSrc" width="100" height="100" /></td>
+                <td>
+                    @if (ViewBag.RestaurantName != null)
+                    {
+                        <p>@ViewBag.RestaurantName</p>
+                    }
+                    else
+                    {
+                        <p>@item.RestaurantID</p>
+                    }
+                </td>
                 <td> @item.ProductName </td>
                 <td> @item.ProductDescription </td>
                 <td> @item.ProductPrice</td>
-                <td> @item.RestaurantID</td>
+
                 @*<td><img src="@Url.Content(item.ImagePath)" width="50" height="50" /></td>*@
 
 

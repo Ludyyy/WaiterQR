@@ -9,8 +9,11 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
+    [Authorize]
+
     public class ActiveOrderController : Controller
     {
+
         // GET: ActiveOrder
         public ActionResult ShowActiveOrder(int restaurantid)
         {

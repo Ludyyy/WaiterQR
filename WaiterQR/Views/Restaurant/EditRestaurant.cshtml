@@ -94,7 +94,9 @@
 </div>
 
 }
-
+<h3>
+    <button class="btn btn-dark">@Html.ActionLink("Delete my Restaurant", "DeleteRestaurant", "Restaurant", new { restaurantid = Model.ID }, null)</button>
+</h3>
 <div>
     @Html.ActionLink("Back to List", "ShowRestaurant","Restaurant")
 </div>

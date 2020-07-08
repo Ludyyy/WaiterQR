@@ -295,6 +295,8 @@
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Images\flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg" />
+    <Content Include="Images\table-on-wooden-plank-326279.jpg" />
     <Content Include="Images\woman-wearing-purple-shirt-holding-smartphone-white-sitting-826349.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

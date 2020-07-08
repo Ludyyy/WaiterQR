@@ -9,6 +9,8 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
+    [Authorize]
+
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart

@@ -5,67 +5,77 @@
 }
 
 <h2>ShowRestaurant</h2>
+<h3>
+    <button class="btn btn-dark">@Html.ActionLink("Register a new Restaurant", "AddRestaurant", "Restaurant")</button>
+    </h3>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <style>
-        table {
-            width: 100%;
-        }
+        <!DOCTYPE html>
 
-        td, th {
-            text-align: center;
-            padding: 15px;
-        }
+        <html>
+        <head>
+            <style>
+                table {
+                    width: 100%;
+                }
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-</head>
-<body>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
- 
-        <th>Owner</th>
-        <th>Location</th>
-        <th>House</th>
-  
-    </tr>
-    @foreach (var item in Model)
-    {
-<tr>
-    <td> @item.ID </td>
-    <td> @item.Name </td>
-    <td> @item.Description </td>
+                td, th {
+                    text-align: center;
+                    padding: 15px;
+                }
 
-    <td> @item.OwnerID </td>
-    <td> @item.PostalCode, @item.City</td>
-    <td> @item.StreetName, @item.HouseNo</td>
-    <td>
-        <button class="btn btn-dark">
-            @Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { restaurantid = item.ID }, null)
-        </button>
-    </td>
-    <td>
-        <button class="btn btn-dark">
-            @Html.ActionLink("Show Tables", "ShowRestaurantTable", "RestaurantTable", new { restaurantid = item.ID }, null)
-        </button>
-    </td>
-    <td>
-        <button class="btn btn-dark">
-            @Html.ActionLink("Show Orders", "ShowActiveOrder", "ActiveOrder", new { restaurantid = item.ID }, null)
-        </button>
-    </td>
-</tr>
-    }
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+            </style>
+        </head>
+        <body>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
 
-</table>
+                    <th>Owner</th>
+                    <th>Location</th>
+                    <th>House</th>
 
-</body>
-</html>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @item.ID </td>
+                        <td> @item.Name </td>
+                        <td> @item.Description </td>
+
+                        <td> @item.OwnerID </td>
+                        <td> @item.PostalCode, @item.City</td>
+                        <td> @item.StreetName, @item.HouseNo</td>
+                        <td>
+                            <button class="btn btn-dark">
+                                @Html.ActionLink("Edit Restaurant", "EditRestaurant", "Restaurant", new { restaurantid = item.ID }, null)
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-dark">
+                                @Html.ActionLink("Manage Products", "ShowProduct", "Product", new { restaurantid = item.ID }, null)
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-dark">
+                                @Html.ActionLink("Show Tables", "ShowRestaurantTable", "RestaurantTable", new { restaurantid = item.ID }, null)
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-dark">
+                                @Html.ActionLink("Show Orders", "ShowActiveOrder", "ActiveOrder", new { restaurantid = item.ID }, null)
+                            </button>
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+        </body>
+    </html>

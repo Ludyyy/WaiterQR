@@ -8,6 +8,8 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
+    [Authorize]
+
     public class RestaurantTableController : Controller
     {
         // GET: RestaurantTable
@@ -98,6 +100,7 @@ namespace WaiterQR.Controllers
                             db.SaveChanges();
                         }
                         ViewBag.message = "Successfully increased to " + restaurantTableViewModel.capacity + " Tables";
+                        ViewBag.resid = restaurantTableViewModel.ResID;
 
                     }
                     else if (tableamount > restaurantTableViewModel.capacity)
@@ -125,11 +128,14 @@ namespace WaiterQR.Controllers
                             db.SaveChanges();
                         }
                         ViewBag.message = "Successfully decreased to "+ restaurantTableViewModel.capacity + " Tables";
+                        ViewBag.resid = restaurantTableViewModel.ResID;
 
                     }
                    else if (tableamount == restaurantTableViewModel.capacity)
                     {
                         ViewBag.message = "Please enter a different Table Capacity Number than the current one";
+                        ViewBag.resid = restaurantTableViewModel.ResID;
+
                     }
                 }
             }

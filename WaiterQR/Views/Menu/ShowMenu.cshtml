@@ -1,52 +1,41 @@
 ﻿@model WaiterQR.Models.MenuViewModel
 @{
+
     ViewBag.Title = "ShowMenu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ShowMenu</h2>
+<h2 style="color:blanchedalmond">Menu</h2>
+
+<style>
+
+    body {
+        background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../Images/table-on-wooden-plank-326279.jpg");
+        background-size: cover;
+    }
+
+    .jumbotron {
+        background: rgba(232, 232, 232, 0.6);
+    }
+</style>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().RestaurantID)
-        </th>
-        <th>
-            Image
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductName) &
-            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.productList.FirstOrDefault().ProductPrice)
-        </th>
-
-        <th></th>
-    </tr>
+<div class="body">
 
     @foreach (var item in Model.productList)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantID)
-            </td>
-            @{var imgSrc = String.Format("data:image/gif;base64,{0}", item.ImagePath); }
-            <td><img src="@imgSrc" width="100" height="100" /></td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-                <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-
-            <td>
-                <button class="btn btn-dark">
-                    @Html.ActionLink("Add To Basket", "AddShoppingCart", "ShoppingCart", new { productid = item.ProductID, tableid = Model.restaurantTable.ID }, null)
-                </button>
-            </td>
-        </tr>
+        <div class="jumbotron col-md-auto">
+            <h1 class="col-4"> @Html.DisplayFor(modelItem => item.ProductName) </h1>
+            <p class="lead ">
+                @{var imgSrc = String.Format("data:image/gif;base64,{0}", item.ImagePath);
+                }
+                <img src="@imgSrc" width="100" height="100" />
+            </p>
+            <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
+            <h1>@Html.DisplayFor(modelItem => item.ProductPrice) €</h1>
+            <button class="btn btn-dark">
+                @Html.ActionLink("Add To Basket", "AddShoppingCart", "ShoppingCart", new { productid = item.ProductID, tableid = Model.restaurantTable.ID }, null)
+            </button>
+        </div>
     }
-</table>
+</div>
