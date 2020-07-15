@@ -20,7 +20,7 @@ namespace WaiterQR.Controllers
         // It takes the link which is needed by the customers to get to the menu and encodes it as a qr code. 
         public ActionResult CreateQrCode(int tableid)
         {
-            string qrText = "https://" + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/menu/showmenu?tableid=" +tableid;
+            string qrText = "http://" + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/menu/showmenu?tableid=" +tableid;
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText,QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
