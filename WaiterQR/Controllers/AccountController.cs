@@ -14,7 +14,7 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
-    [Authorize]
+    [Authorize] //only accessible with login
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

@@ -1,4 +1,6 @@
-﻿@using WaiterQR.Models
+﻿@*Gives the option to put in the login relevant data and sends it to the controller*@
+
+@using WaiterQR.Models
 @model LoginViewModel
 @{
     ViewBag.Title = "Login";
@@ -44,11 +46,11 @@
                 <button class="btn btn-dark">
                     @Html.ActionLink("Register as new user", "Register")
                 </button>
-                    @* Aktivieren Sie diese Option, nachdem Sie die Kontobestätigung für die Funktion zum Zurücksetzen des Kennworts aktiviert haben.
-                <p>
-                    @Html.ActionLink("ForgotPassword?", "ForgotPassword")
-                </p>*@
-                }
+                @* Aktivieren Sie diese Option, nachdem Sie die Kontobestätigung für die Funktion zum Zurücksetzen des Kennworts aktiviert haben.
+                    <p>
+                        @Html.ActionLink("ForgotPassword?", "ForgotPassword")
+                    </p>*@
+            }
         </section>
     </div>
 </div>

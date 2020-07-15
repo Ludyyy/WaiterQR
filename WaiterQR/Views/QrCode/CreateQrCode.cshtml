@@ -1,4 +1,7 @@
-﻿@model Byte[]
+﻿@*Gives out the page with the link to the menu of a specific restaurant and the refering image with the qr code
+    Authors: Dennis Ludwig, Dennis Keles, Sheng Jing Ly*@
+
+@model Byte[]
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,22 +12,22 @@
 <body>
     <div class="container">
         <div id="content">
-            
-                @if (ViewBag.message != null)
-                {
-                    <h4>@ViewBag.message</h4>
-                }
-           
+
+            @if (ViewBag.message != null)
+            {
+                <h4>@ViewBag.message</h4>
+            }
+
 
             @{
                 if (Model != null)
                 {
-                    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model))" width="300" height="300"/>
+                    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model))" width="300" height="300" />
                 }
             }
         </div>
     </div>
 
-    
+
 </body>
 </html>

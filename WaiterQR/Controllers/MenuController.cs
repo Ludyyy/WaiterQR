@@ -15,7 +15,7 @@ namespace WaiterQR.Controllers
 
     public class MenuController : Controller
     {
-        // GET: Menu
+        // GET: Gives out the menu for a specific restaurant based on the given table id. In the backend the table is stil stored
         public ActionResult ShowMenu(int tableid)
         {
             try
@@ -64,36 +64,5 @@ namespace WaiterQR.Controllers
 
             }
         }
-
-        [HttpPost]
-        public ActionResult ShowMenu()
-        {
-            try
-            {
-                var tempList = new List<Product>();
-                using (websitedbEntities db = new websitedbEntities())
-                {
-                    //foreach (Product p in db.Product)
-                    //{
-                    //    if (p.RestaurantID == restaurantid)
-                    //    {
-                    //        tempList.Add(p);
-                    //    }
-                    //}
-                }
-                return View(tempList);
-            }
-
-
-            catch (Exception e)
-            {
-                string s = string.Format("Fehler: {0}", e.Message);
-                s = string.Format("Typ: {0}", e.GetType());
-                return View();
-
-            }
-        }
-
-        
     }
 }

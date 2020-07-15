@@ -15,12 +15,12 @@ using System.IO;
 
 namespace WaiterQR.Controllers
 {
-    [Authorize]
+    [Authorize] //only accessible with login
 
     public class ProductController : Controller
     {
         
-        // GET: Product
+        // GET: Gives out the products for a specific restaurant based on the given restaurant id
         public ActionResult ShowProduct(int? restaurantid)
         {
             if (restaurantid == null)
@@ -84,13 +84,13 @@ namespace WaiterQR.Controllers
 
 
 
-        // GET: Product/Create
+        // GET: Opens the addproduct view and gives the user the option to set the attributes
         public ActionResult AddProduct()
         {
             return View();
         }
 
-        // POST: Product/Create
+        // POST: Product/Create Creates the product in the database based on the user input
         [HttpPost]
         public ActionResult AddProduct(Product product)
         {
@@ -139,7 +139,8 @@ namespace WaiterQR.Controllers
             }
         }
 
-
+        // GET: Opens the editproduct view and gives the user the option to reset the attributes. The product id clearly identifies the product to change and
+        // therefore the fields are auto completed
         public ActionResult EditProduct(int productID)
         {
             if (!productID.Equals(null))
@@ -165,7 +166,7 @@ namespace WaiterQR.Controllers
             }
             return View();
         }
-
+        // POST: Product/Edit Edits the product in the database based on the user input
         [HttpPost]
         public ActionResult EditProduct(Product product)
         {
@@ -211,6 +212,8 @@ namespace WaiterQR.Controllers
                 return View();
             }
         }
+
+        // Product/Delete Deletes the product in the database based on the given product id
         public ActionResult DeleteProduct(int productID)
         {
             try

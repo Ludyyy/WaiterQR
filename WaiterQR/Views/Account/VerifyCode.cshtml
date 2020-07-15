@@ -1,11 +1,15 @@
-﻿@model WaiterQR.Models.VerifyCodeViewModel
+﻿@* Gives  an option to confirm 2-factor authentification of the user*@
+
+
+@model WaiterQR.Models.VerifyCodeViewModel
 @{
     ViewBag.Title = "Überprüfen";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
     @Html.AntiForgeryToken()
     @Html.Hidden("provider", @Model.Provider)
     @Html.Hidden("rememberMe", @Model.RememberMe)

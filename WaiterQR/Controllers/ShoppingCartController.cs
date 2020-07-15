@@ -51,7 +51,6 @@ namespace WaiterQR.Controllers
                 else
                     lscart[check].quantity++;
 
-                //lscart.Add(new Cart(db.Product.Find(id), 1));
                 Session["ShoppingCartViewModel"] = lscart;
                 Session["tableid"] = tableid;
 

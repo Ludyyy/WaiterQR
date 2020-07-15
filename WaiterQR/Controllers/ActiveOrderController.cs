@@ -13,12 +13,12 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
-    [Authorize]
+    [Authorize] //only accessible with login
 
     public class ActiveOrderController : Controller
     {
 
-        // GET: ActiveOrder
+        // GET: Gives out the products ordered by the users. Additionally it gives information on the amount and the table ordered from
         public ActionResult ShowActiveOrder(int restaurantid)
         {
             List<ActiveOrderViewModel> tempList = new List<ActiveOrderViewModel> ();
@@ -66,7 +66,7 @@ namespace WaiterQR.Controllers
 
             }
         }
-
+        // Sets order elements as finished and therefore it is removed from the activeorder list
         public ActionResult FinishOrder(int orderid)
         {
             ShoppingCart sc = new ShoppingCart();

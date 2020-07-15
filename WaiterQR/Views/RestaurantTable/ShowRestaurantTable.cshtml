@@ -1,4 +1,8 @@
-﻿@model WaiterQR.Models.RestaurantTableViewModel
+﻿@*Gives the option to show the available restaurant tables and the reffering qrcodes.
+    Authors: Dennis Ludwig, Dennis Keles, Sheng Jing Ly*@
+
+
+@model WaiterQR.Models.RestaurantTableViewModel
 
 @{
     ViewBag.Title = "ShowRestaurantTable";
@@ -9,7 +13,7 @@
 <h3>Currently you registered @Model.RestaurantTables.Count tables </h3>
 
 <h3>
-    <button class="btn btn-dark">@Html.ActionLink("Change amount of Tables", "EditRestaurantTable", "RestaurantTable", new { restaurantid = Model.ResID}, null)</button>
+    <button class="btn btn-dark">@Html.ActionLink("Change amount of Tables", "EditRestaurantTable", "RestaurantTable", new { restaurantid = Model.ResID }, null)</button>
 </h3>
 
 
@@ -37,20 +41,20 @@
         <tr>
             <th>Restaurant</th>
             <th>Table</th>
-            
+
         </tr>
         @foreach (var item in Model.RestaurantTables)
         {
-    <tr>
-        <td> @item.RestaurantID </td>
-        <td> @item.RestaurantSeat </td>
+            <tr>
+                <td> @item.RestaurantID </td>
+                <td> @item.RestaurantSeat </td>
 
-        <td>
-            <button class="btn btn-dark">
-                @Html.ActionLink("Show QR Code", "CreateQRCOde", "QrCode", new { tableid = item.ID }, null)
-            </button>
-        </td>
-    </tr>
+                <td>
+                    <button class="btn btn-dark">
+                        @Html.ActionLink("Show QR Code", "CreateQRCOde", "QrCode", new { tableid = item.ID }, null)
+                    </button>
+                </td>
+            </tr>
         }
 
     </table>

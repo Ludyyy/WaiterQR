@@ -14,15 +14,16 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
-    [Authorize]
+    [Authorize] //only accessible with login
 
     public class RestaurantController : Controller
     {
-        // GET: Restaurant
+        // GET: Opens the addproduct view and gives the user the option to set the attributes
         public ActionResult AddRestaurant()
         {
             return View();
         }
+        // POST: Product/Create Creates the product in the database based on the user input
         [HttpPost]
         public ActionResult AddRestaurant(Restaurant restaurants)
         {
@@ -62,7 +63,7 @@ namespace WaiterQR.Controllers
             return RedirectToAction("ShowRestaurant");
 
         }
-
+        // GET: Gives out all the restaurant in the db
         public ActionResult ShowRestaurant()
         {
             try
@@ -88,6 +89,8 @@ namespace WaiterQR.Controllers
             }
 
         }
+        // GET: Opens the EditRestaurant view and gives the user the option to reset the attributes. The restaurant id clearly identifies the product to change and
+        // therefore the fields are auto completed
         public ActionResult EditRestaurant(int restaurantid)
         {
             if (!restaurantid.Equals(null))
@@ -118,6 +121,7 @@ namespace WaiterQR.Controllers
 
 
     }
+        // POST: REstaurant/Edit Edits the product in the database based on the user input
         [HttpPost]
         public ActionResult EditRestaurant(Restaurant restaurants)
         {
@@ -155,7 +159,7 @@ namespace WaiterQR.Controllers
 
         }
 
-        
+        // Restaurant/Delete Deletes the product in the database based on the given product id
         public ActionResult DeleteRestaurant(int restaurantid)
         {
             using(websitedbEntities db = new websitedbEntities())

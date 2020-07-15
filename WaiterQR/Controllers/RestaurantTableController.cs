@@ -11,11 +11,11 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
-    [Authorize]
+    [Authorize] //only accessible with login
 
     public class RestaurantTableController : Controller
     {
-        // GET: RestaurantTable
+        // GET: Gives out the restaurant tables for a specific restaurant based on the given restaurant id
         public ActionResult ShowRestaurantTable(int restaurantid)
         {
             try
@@ -48,7 +48,8 @@ namespace WaiterQR.Controllers
             }        
         }
 
-
+        // GET: Opens the EditRestaurantTable view and gives the user the option to reset the attributes. The restaurant id clearly identifies the restaurant to change and
+        // therefore the fields are auto completed
         public ActionResult EditRestaurantTable(int restaurantid)
         {
             try
@@ -76,7 +77,7 @@ namespace WaiterQR.Controllers
             return View();
 
         }
-
+        // POST: RestaurantTable/Edit Edits the product in the database based on the user input
         [HttpPost]
         public ActionResult EditRestaurantTable(RestaurantTableViewModel restaurantTableViewModel)
         {
