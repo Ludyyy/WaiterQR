@@ -2,6 +2,7 @@
     Authors: Dennis Ludwig, Dennis Keles, Sheng Jing Ly*@
 
 @using WaiterQR.Models;
+@using System.Globalization;
 @{
     ViewBag.Title = "Shopping cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -55,14 +56,15 @@
                 <button class="btn btn-dark">
                     @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.product.ProductID }, new { onclick = "return cornfirm('Are you sure you want to delete this?');" })
                 </button>
-
+                <hr>
             }
 
             @{
+                var provider = new CultureInfo("de-DE");
                 List<ShoppingCartViewModel> temp = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
-                decimal total = temp.Sum(x => (x.quantity) * decimal.Parse(x.product.ProductPrice));
+                decimal total = temp.Sum(x => (x.quantity) * decimal.Parse(x.product.ProductPrice, provider));
             }
-            <hr>
+
             <h1>Total Price: @total €</h1>
 
         </div>
