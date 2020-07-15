@@ -4,17 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <style>
+<style>
+    body {
+        background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../Images/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg");
+        background-size: cover;
+    }
 
-        body {
-            background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../Images/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg");
-            background-size: cover;
-        }
-
-        .jumbotron {
-            background: rgba(232, 232, 232, 0.6);
-        }
-    </style>
+    .jumbotron {
+        background: rgba(232, 232, 232, 0.6);
+    }
+</style>
 
 <h2 style="color:whitesmoke">Your Basket</h2>
 
@@ -90,14 +89,14 @@
             <h4> No items in your basket!!!</h4>
         }
     }
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#quantity").keypress(function (e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    $("#errmsg").html("Enter digits only!").show().fadeOut("slow");
-                    return false;
-                }
-            });
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#quantity").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Enter digits only!").show().fadeOut("slow");
+                return false;
+            }
         });
-    </script>
+    });
+</script>

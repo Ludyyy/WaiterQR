@@ -9,7 +9,7 @@ using WaiterQR.Models;
 
 namespace WaiterQR.Controllers
 {
-    [Authorize]
+ 
 
     public class ShoppingCartController : Controller
     {
@@ -52,8 +52,8 @@ namespace WaiterQR.Controllers
                 Session["tableid"] = tableid;
 
             }
+            return RedirectToAction("ShowShoppingCart");
 
-            return View("ShowShoppingCart");
 
         }
         private int isExistingCheck(int? id)
@@ -77,7 +77,7 @@ namespace WaiterQR.Controllers
             lsCart.RemoveAt(check);
 
             ViewBag.message = "This is a shopping cart.";
-            return View("ShowShoppingCart");
+            return RedirectToAction("ShowShoppingCart");
         }
 
 
@@ -85,9 +85,10 @@ namespace WaiterQR.Controllers
         {
             //List<ShoppingCartViewModel> lsCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
             //int count = lsCart.
-            List<ShoppingCartViewModel> lscart = new List<ShoppingCartViewModel> ();
-            lscart = (List<ShoppingCartViewModel>) Session["ShoppingCartViewModel"];
-            
+            List<ShoppingCartViewModel> lscart = new List<ShoppingCartViewModel>();
+            lscart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
+            int tableidgive=0;
+
             using (websitedbEntities db = new websitedbEntities())
             {
 
@@ -101,26 +102,27 @@ namespace WaiterQR.Controllers
                     shoppingCart.ProductCount = cart.quantity;
                     shoppingCart.RestaurantID = cart.product.RestaurantID;
                     shoppingCart.RestaurantIDTable = cart.tableid;
+                    tableidgive = cart.tableid;
 
                     db.ShoppingCart.Add(shoppingCart);
                     db.SaveChanges();
-                
+
                 }
 
             }
-            return View("ShowShoppingCart");
+            return RedirectToAction("ShowMenu", "Menu", new { tableid = tableidgive });
         }
 
         public ActionResult UpdateCart(FormCollection frc)
         {
             string[] quantities = frc.GetValues("quantity");
             List<ShoppingCartViewModel> lstCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
-            for (int i =0; i< lstCart.Count; i++)
+            for (int i = 0; i < lstCart.Count; i++)
             {
                 lstCart[i].quantity = Convert.ToInt32(quantities[i]);
             }
             Session["ShoppingCartViewModel"] = lstCart;
-            return View("ShowShoppingCart");
+            return RedirectToAction("ShowShoppingCart");
         }
     }
 }

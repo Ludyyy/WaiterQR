@@ -37,7 +37,7 @@ namespace WaiterQR.Controllers
                                     if (p.ProductID == sc.ProductIDs)
                                     {
                                         ActiveOrderViewModel aovw = new ActiveOrderViewModel();
-                                        aovw.Tableid = db.RestaurantTable.Find(sc.RestaurantIDTable).RestaurantSeat;
+                                        aovw.Tableid = db.RestaurantTable.Find(sc.RestaurantIDTable).RestaurantSeat;  
                                         aovw.Productname = p.ProductName;
                                         aovw.Amount = sc.ProductCount;
                                         aovw.Status = sc.OrderStatus;
