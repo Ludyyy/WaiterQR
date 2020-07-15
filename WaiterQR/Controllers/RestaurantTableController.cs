@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This class defines the product handling such as Editing, Deleting, Adding and Showing of different RestaurantTables.
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

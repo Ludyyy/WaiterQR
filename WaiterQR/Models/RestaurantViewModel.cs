@@ -1,4 +1,8 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿// The RestaurantViewModel contains the important attributes of the Restaurant dataframe within the sql database
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.Owin.BuilderProperties;
 using System;
 using System.Collections.Generic;

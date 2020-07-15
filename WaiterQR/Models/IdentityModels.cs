@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿// Handles the Account interaction data and gives feedback to the view
+
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;

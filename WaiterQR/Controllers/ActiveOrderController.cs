@@ -1,4 +1,8 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
+﻿// This class is used for handling the activeorders by the restaurant owners. This includes showing the open orders for a restaurant and setting the order
+// as done by the restaurant owner. 
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

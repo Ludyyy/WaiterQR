@@ -1,4 +1,7 @@
-﻿using System;
+﻿// ViewModel for the Active Order Controller to process data to the view
+//
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

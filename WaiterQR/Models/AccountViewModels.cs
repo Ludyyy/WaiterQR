@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// ViewModel for the Account Controller to process data to the view
+
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WaiterQR.Models

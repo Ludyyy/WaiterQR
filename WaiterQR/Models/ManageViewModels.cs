@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// ViewModel for the Manage Controller to process data to the view. It contains attributes such as setpasswords,change password and add phone number
+
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// This class controls the Account management including the login, registering, etc.
+
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;

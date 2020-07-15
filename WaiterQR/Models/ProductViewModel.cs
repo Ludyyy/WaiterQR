@@ -1,4 +1,7 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿// The productviewmodel contains the important attributes of the Product dataframe within the sql database
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.Owin.BuilderProperties;
 using System;
 using System.Collections.Generic;

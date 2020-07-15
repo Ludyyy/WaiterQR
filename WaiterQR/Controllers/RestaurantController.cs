@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This class defines the product handling such as Editing, Deleting and Showing of different restaurants.
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;

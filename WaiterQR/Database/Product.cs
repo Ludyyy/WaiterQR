@@ -23,7 +23,7 @@ namespace WaiterQR.Database
         public string ProductPrice { get; set; }
         
         [DisplayName("UploadFile")]
-        public string ImagePath { get; set; }
+        public string ImagePath { get; set; } //This parameter is used to set the imagepath to the picture when the editor presses "UploadFile")
 
         public HttpPostedFileBase ImageFile { get; set; }
     }

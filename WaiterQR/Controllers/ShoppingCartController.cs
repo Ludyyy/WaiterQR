@@ -1,4 +1,8 @@
-﻿using System;
+﻿// This class defines the product handling such as Showing of the ShoppingCart, Adding of items to the shopping cart. Deleting
+// from the ShoppingCart and editing the amount of items.
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.Xml;
@@ -13,13 +17,13 @@ namespace WaiterQR.Controllers
 
     public class ShoppingCartController : Controller
     {
-        // GET: ShoppingCart
+        // GET: Visualize the shopping Cart
 
         public ActionResult ShowShoppingCart()
         {
             return View();
         }
-
+        // This methods adds items to the shopping cart. It takes the productid and the tableid to know which table wants which product.
         public ActionResult AddShoppingCart(int? productid, int? tableid)
         {
             websitedbEntities db = new websitedbEntities();
@@ -56,6 +60,9 @@ namespace WaiterQR.Controllers
 
 
         }
+        
+        
+        // Checks whether the shopping cart is existing and returns -1 if not
         private int isExistingCheck(int? id)
         {
             List<ShoppingCartViewModel> lscart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
@@ -65,7 +72,7 @@ namespace WaiterQR.Controllers
             }
             return -1;
         }
-
+        // This methods deletes an item from the shopping cart based on the shopping cart id.
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -80,11 +87,10 @@ namespace WaiterQR.Controllers
             return RedirectToAction("ShowShoppingCart");
         }
 
-
+        // If the order is finished the it saves the shopping cart in the database with orderstatus=1 which means that the order is set active.
         public ActionResult OrderFinished()
         {
-            //List<ShoppingCartViewModel> lsCart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
-            //int count = lsCart.
+            
             List<ShoppingCartViewModel> lscart = new List<ShoppingCartViewModel>();
             lscart = (List<ShoppingCartViewModel>)Session["ShoppingCartViewModel"];
             int tableidgive=0;
@@ -113,6 +119,7 @@ namespace WaiterQR.Controllers
             return RedirectToAction("ShowMenu", "Menu", new { tableid = tableidgive });
         }
 
+        // This method collects the input data and updates the shopping cart
         public ActionResult UpdateCart(FormCollection frc)
         {
             string[] quantities = frc.GetValues("quantity");

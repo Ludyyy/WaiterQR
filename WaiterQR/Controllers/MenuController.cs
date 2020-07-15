@@ -1,4 +1,7 @@
-﻿using DocumentFormat.OpenXml.Office.CustomUI;
+﻿// Over this class the menus are handled and visualised. It gives out the menu for a specific restaurant based on the tableid.
+// Authors: Dennis Keles, Dennis Ludwig, Sheng Jing Ly
+
+using DocumentFormat.OpenXml.Office.CustomUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;

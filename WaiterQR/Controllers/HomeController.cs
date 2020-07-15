@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This class is the controller for the Startpage. It handles different outgoing pages from the startpage.Such as the impressum and the about page.
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

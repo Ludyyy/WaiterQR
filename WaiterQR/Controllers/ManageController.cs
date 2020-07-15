@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This class is provided by ASPNET and handles the Account management
+
+
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
